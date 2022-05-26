@@ -7,7 +7,6 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -22,18 +21,25 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    @Column(nullable = false, unique = true)
-    private UUID ref;
+    // @Column(nullable = false, unique = true)
+    // private UUID ref;
+    @Column(nullable = false)
+    private String lastname;
     @Column(nullable = false)
     private String firstname;
     @Column(nullable = false)
-    private String lastname;
+    private String email;
+    @Column(nullable = false)
+    private String phoneNumber;
     @Column(nullable = false)
     private String username;
     @Column(nullable = false)
     private String password;
+    @OneToMany(mappedBy = "user")
+    private List<Cart> carts;
+    
 
     @Column(nullable = false)
     private boolean active;

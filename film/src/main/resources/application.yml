@@ -1,7 +1,7 @@
 spring:
-	application:
-		name: film-service
-	profiles:
-		active: dev
-	config:
-		import: configserver:http://root:s3cr3t@localhost:8888
+  application:
+    name: film-service
+  profiles:
+    active: dev
+  config:
+    import: configserver:http://root:s3cr3t@localhost:8888
