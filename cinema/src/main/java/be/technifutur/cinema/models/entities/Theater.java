@@ -14,6 +14,8 @@ public class Theater {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false, unique = true)
+    private UUID ref;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)

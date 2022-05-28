@@ -36,7 +36,4 @@ public class Movie {
     @JoinTable(name="Movie_Person")
     private List<Person> persons;
 
-    private static enum Status{
-        CURRENT,SOON,FINISH
-    }
 }

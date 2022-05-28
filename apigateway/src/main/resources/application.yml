@@ -5,3 +5,11 @@ spring:
 		active: dev
 	config:
 		import: configserver:http://root:s3cr3t@localhost:8888
+  cloud:
+    gateway:
+      routes:
+        # - id: to-facture
+        #   uri: lb://facture-service
+        #   predicates:
+        #     - Path=/facture/**
+        #     - Method=GET,POST

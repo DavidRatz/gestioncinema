@@ -10,6 +10,7 @@ import lombok.*;
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
