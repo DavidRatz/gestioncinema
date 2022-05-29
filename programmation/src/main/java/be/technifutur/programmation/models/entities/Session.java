@@ -8,15 +8,16 @@ import lombok.*;
 
 @Entity
 @Getter @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, unique = true)
-    private UUID ref;
+    @Builder.Default
+    private UUID ref = UUID.randomUUID();
     @Column(nullable = false, unique = true)
     private UUID refRoom;
     @Column(nullable = false, unique = true)

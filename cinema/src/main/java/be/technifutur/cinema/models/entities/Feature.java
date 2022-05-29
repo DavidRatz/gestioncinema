@@ -1,11 +1,11 @@
 package be.technifutur.cinema.models.entities;
 
-import java.util.UUID;
 import javax.persistence.*;
 import lombok.*;
 
 @Entity
 @Getter @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Feature {

@@ -11,16 +11,16 @@ import lombok.*;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MovieDTO implements Serializable{
-    private Long id;
-    private UUID ref;
-    private String title;
-    private String description;
-    private float duration;
-    private LocalDate releaseDate;
-    private Status status;
-    private List<FormatDTO> formats;
-    private List<GenreDTO> genres;
-    private List<PersonDTO> persons;
+    private final Long id;
+    private final UUID ref;
+    private final String title;
+    private final String description;
+    private final float duration;
+    private final LocalDate releaseDate;
+    private final Status status;
+    private final List<FormatDTO> formats;
+    private final List<GenreDTO> genres;
+    private final List<PersonDTO> persons;
 
     public static MovieDTO of(Movie movie){
         if(movie == null){

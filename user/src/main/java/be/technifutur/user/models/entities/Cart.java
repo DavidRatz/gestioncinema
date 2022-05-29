@@ -6,6 +6,7 @@ import lombok.*;
 
 @Entity
 @Getter @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cart {
@@ -13,7 +14,8 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, unique = true)
-    private UUID ref;
+    @Builder.Default
+    private UUID ref = UUID.randomUUID();
     @Column(nullable = false)
     private int quantity;
     @Column(nullable = false)

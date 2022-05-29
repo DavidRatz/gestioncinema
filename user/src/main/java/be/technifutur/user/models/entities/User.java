@@ -1,6 +1,7 @@
 package be.technifutur.user.models.entities;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import java.util.UUID;
 
 @Entity
 @Getter @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class User implements UserDetails {
@@ -42,7 +44,8 @@ public class User implements UserDetails {
     
 
     @Column(nullable = false)
-    private boolean active;
+    @Builder.Default
+    private boolean active = true;
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;

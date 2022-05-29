@@ -7,6 +7,7 @@ import lombok.*;
 
 @Entity
 @Getter @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Ticket {
@@ -14,7 +15,8 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, unique = true)
-    private UUID ref;
+    @Builder.Default
+    private UUID ref = UUID.randomUUID();
     @Column(nullable = false)
     private LocalDateTime dateShipping;
     @Column(nullable = false, unique = true)
