@@ -17,7 +17,7 @@ public class TheaterDTO implements Serializable {
     private final LocalDate dateCreation;
     private final String phoneNumber;
     private final boolean active;
-    private final Address address;
+    private final AddressDTO address;
     private final List<RoomDTO> rooms;
 
     public static TheaterDTO of(Theater theater) {
@@ -31,7 +31,7 @@ public class TheaterDTO implements Serializable {
             theater.getDateCreation(),
             theater.getPhoneNumber(),
             theater.isActive(),
-            theater.getAddress(),
+            AddressDTO.of(theater.getAddress()),
             theater.getRooms() == null ? null : theater.getRooms().stream()
                     .map(RoomDTO::of)
                     .toList()

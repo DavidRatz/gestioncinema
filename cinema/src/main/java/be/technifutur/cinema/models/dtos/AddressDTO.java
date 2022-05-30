@@ -8,6 +8,7 @@ import lombok.*;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class AddressDTO implements Serializable{
+    private final Long id;
     private final String street;
     private final String number;
     private final int postCode;
@@ -19,6 +20,7 @@ public class AddressDTO implements Serializable{
             return null;
 
         return new AddressDTO(
+            address.getId(),
             address.getStreet(),
             address.getNumber(),
             address.getPostCode(),

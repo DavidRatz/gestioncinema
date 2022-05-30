@@ -8,6 +8,7 @@ import lombok.*;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class GenreDTO implements Serializable {
+    private final Long id;
     private final String description;
 
     public static GenreDTO of(Genre genre) {
@@ -15,6 +16,7 @@ public class GenreDTO implements Serializable {
             return null;
 
         return new GenreDTO(
+            genre.getId(),
             genre.getDescription()
         );
     }

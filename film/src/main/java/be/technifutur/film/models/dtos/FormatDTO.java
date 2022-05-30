@@ -8,6 +8,7 @@ import lombok.*;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class FormatDTO implements Serializable {
+    private final Long id;
     private final String description;
 
     public static FormatDTO of(Format format) {
@@ -15,6 +16,7 @@ public class FormatDTO implements Serializable {
             return null;
 
         return new FormatDTO(
+            format.getId(),
             format.getDescription()
         );
     }

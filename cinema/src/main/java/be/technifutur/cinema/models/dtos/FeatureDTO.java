@@ -8,6 +8,7 @@ import lombok.*;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class FeatureDTO implements Serializable {
+    private final Long id;
     private final String description;
 
     public static FeatureDTO of(Feature feature) {
@@ -15,6 +16,7 @@ public class FeatureDTO implements Serializable {
             return null;
 
         return new FeatureDTO(
+            feature.getId(),
             feature.getDescription()
         );
     }
