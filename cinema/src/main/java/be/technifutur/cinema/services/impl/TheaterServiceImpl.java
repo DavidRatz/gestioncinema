@@ -4,21 +4,21 @@ import be.technifutur.cinema.models.dtos.TheaterDTO;
 import be.technifutur.cinema.models.forms.TheaterForm;
 import be.technifutur.cinema.models.entities.Address;
 import be.technifutur.cinema.models.entities.Theater;
-import be.technifutur.cinema.models.repositories.TheaterRepository;
+import be.technifutur.cinema.models.repositories.*;
 import be.technifutur.cinema.services.TheaterService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class TheaterServiceImpl implements TheaterService {
 
     private final TheaterRepository repository;
+    private final AddressRepository addressRepo;
 
-    public TheaterServiceImpl(TheaterRepository repository) {
+    public TheaterServiceImpl(TheaterRepository repository, AddressRepository addressRepo) {
         this.repository = repository;
+        this.addressRepo = addressRepo;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class TheaterServiceImpl implements TheaterService {
                             .name(form.getName())
                             .dateCreation(form.getDateCreation())
                             .phoneNumber(form.getPhoneNumber())
-                            .address(address2Insert)
+                            .address(addressRepo.save(address2Insert))
                             .build();
         return TheaterDTO.of(repository.save(toInsert));
     }
@@ -55,6 +55,25 @@ public class TheaterServiceImpl implements TheaterService {
         toUpdate.setName(form.getName());
         toUpdate.setDateCreation(form.getDateCreation());
         toUpdate.setPhoneNumber(form.getPhoneNumber());
+
+        Address address2Update = addressRepo.findByTheater(id).orElseThrow();
+        address2Update.setStreet(form.getAddress().getStreet());
+        address2Update.setNumber(form.getAddress().getNumber());
+        address2Update.setPostCode(form.getAddress().getPostCode());
+        address2Update.setCity(form.getAddress().getCity());
+        address2Update.setCountry(form.getAddress().getCountry());
+        address2Update = addressRepo.save(address2Update);
+
+        toUpdate = repository.save(toUpdate);
+        toUpdate.setAddress(address2Update);
+
+        return TheaterDTO.of(toUpdate);
+    }
+
+    @Override
+    public TheaterDTO patchActive(Long id, boolean active) {
+        Theater toUpdate = repository.findById(id).orElseThrow();
+        toUpdate.setActive(active);
         toUpdate = repository.save(toUpdate);
         return TheaterDTO.of(toUpdate);
     }

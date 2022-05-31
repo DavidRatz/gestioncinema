@@ -34,6 +34,11 @@ public class TheaterController {
         return service.update(id, theaterForm);
     }
 
+    @PatchMapping("/{id}")
+    public TheaterDTO patchTheaterActive(@PathVariable Long id, @RequestBody boolean active) {
+        return service.patchActive(id, active);
+    }
+
     @DeleteMapping("/{id}")
     public TheaterDTO deleteTheater(@PathVariable Long id) {
         return service.delete(id);

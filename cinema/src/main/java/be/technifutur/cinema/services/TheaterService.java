@@ -10,4 +10,5 @@ public interface TheaterService {
     TheaterDTO insert(TheaterForm form);
     TheaterDTO delete(Long id);
     TheaterDTO update(Long id, TheaterForm form);
+    TheaterDTO patchActive(Long id, boolean active);
 }

@@ -31,11 +31,11 @@ public class User implements UserDetails {
     private String lastname;
     @Column(nullable = false)
     private String firstname;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false)
     private String phoneNumber;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
     @Column(nullable = false)
     private String password;

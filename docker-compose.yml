@@ -5,7 +5,7 @@ networks:
     driver: bridge
 services:
   rabbitmq:
-    container_name: "gestioncinema_rabbitmq"
+    container_name: "rabbitmq"
     image: rabbitmq:3.9-management-alpine
     # environment:
     #   - RABBITMQ_DEFAULT_USER=david
@@ -56,7 +56,7 @@ services:
     depends_on:
       - consul-server
   consul-server:
-    container_name: "gestioncinema_consul_server"
+    container_name: "consul_server"
     image: consul
     ports:
       - "8500:8500"

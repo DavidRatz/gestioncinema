@@ -7,9 +7,6 @@ import be.technifutur.cinema.models.entities.Theater;
 import lombok.Data;
 
 @Data
-public class RoomForm {
-    private String number;
+public class RoomUpdateForm {
     private int numberSeats;
-    private Long theater;
-    private List<Long> features;
 }

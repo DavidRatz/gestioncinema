@@ -1,12 +1,14 @@
 package be.technifutur.cinema.services.impl;
 
 import be.technifutur.cinema.models.dtos.RoomDTO;
-import be.technifutur.cinema.models.forms.RoomForm;
+import be.technifutur.cinema.models.forms.*;
+import be.technifutur.cinema.models.entities.Feature;
 import be.technifutur.cinema.models.entities.Room;
 import be.technifutur.cinema.models.repositories.*;
 import be.technifutur.cinema.services.RoomService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -14,10 +16,12 @@ public class RoomServiceImpl implements RoomService {
 
     private final RoomRepository repository;
     private final TheaterRepository theaterRepo;
+    private final FeatureRepository featureRepo;
 
-    public RoomServiceImpl(RoomRepository repository, TheaterRepository theaterRepository) {
+    public RoomServiceImpl(RoomRepository repository, TheaterRepository theaterRepository, FeatureRepository featureRepo) {
         this.repository = repository;
         this.theaterRepo = theaterRepository;
+        this.featureRepo = featureRepo;
     }
 
     @Override
@@ -37,13 +41,26 @@ public class RoomServiceImpl implements RoomService {
                         .numberSeats(form.getNumberSeats())
                         .theater(theaterRepo.findById(form.getTheater()).orElseThrow())
                         .build();
+        List<Feature> features = new ArrayList<>();
+        for (Long idFeature : form.getFeatures()) {
+            features.add(featureRepo.findById(idFeature).orElseThrow());
+        }
+        toInsert.setFeatures(features);
         return RoomDTO.of(repository.save(toInsert));
     }
 
     @Override
-    public RoomDTO update(Long id, RoomForm form) {
+    public RoomDTO update(Long id, RoomUpdateForm form) {
         Room toUpdate = repository.findById(id).orElseThrow();
-    //set value;
+        toUpdate.setNumberSeats(form.getNumberSeats());
+        toUpdate = repository.save(toUpdate);
+        return RoomDTO.of(toUpdate);
+    }
+
+    @Override
+    public RoomDTO patchActive(Long id, boolean active) {
+        Room toUpdate = repository.findById(id).orElseThrow();
+        toUpdate.setActive(active);
         toUpdate = repository.save(toUpdate);
         return RoomDTO.of(toUpdate);
     }
@@ -54,4 +71,7 @@ public class RoomServiceImpl implements RoomService {
         repository.delete(toDelete);
         return RoomDTO.of(toDelete);
     }
+
+    
+    
 }

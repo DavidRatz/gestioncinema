@@ -10,6 +10,5 @@ public class TheaterForm {
     private String name;
     private LocalDate dateCreation;
     private String phoneNumber;
-    private boolean active;
     private AddressForm address;
 }
