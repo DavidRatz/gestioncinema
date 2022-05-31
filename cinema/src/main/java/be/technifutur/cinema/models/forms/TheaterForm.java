@@ -12,5 +12,4 @@ public class TheaterForm {
     private String phoneNumber;
     private boolean active;
     private AddressForm address;
-    private List<Long> rooms;
 }

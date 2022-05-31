@@ -16,7 +16,8 @@ public class Theater {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, unique = true)
-    private UUID ref;
+    @Builder.Default
+    private UUID ref = UUID.randomUUID();
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
@@ -24,7 +25,8 @@ public class Theater {
     @Column(nullable = false)
     private String phoneNumber;
     @Column(nullable = false)
-    private boolean active;
+    @Builder.Default
+    private boolean active = true;
     @OneToOne
     private Address address;
     @OneToMany(mappedBy = "theater")

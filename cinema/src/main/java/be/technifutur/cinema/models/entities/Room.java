@@ -15,13 +15,15 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, unique = true)
-    private UUID ref;
+    @Builder.Default
+    private UUID ref = UUID.randomUUID();
     @Column(nullable = false)
     private String number;
     @Column(nullable = false)
     private int numberSeats;
     @Column(nullable = false)
-    private boolean active;
+    @Builder.Default
+    private boolean active = true;
     @ManyToOne
     private Theater theater;
     @ManyToMany
