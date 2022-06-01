@@ -1,4 +1,4 @@
-package be.technifutur.user.config;
+package be.technifutur.user.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

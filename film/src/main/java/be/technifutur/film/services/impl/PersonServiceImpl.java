@@ -4,7 +4,10 @@ import be.technifutur.film.models.dtos.PersonDTO;
 import be.technifutur.film.models.forms.PersonForm;
 import be.technifutur.film.models.entities.Person;
 import be.technifutur.film.models.repositories.PersonRepository;
+import be.technifutur.film.models.repositories.RoleRepository;
 import be.technifutur.film.services.PersonService;
+import be.technifutur.film.utils.FormConverterList;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,9 +16,11 @@ import java.util.List;
 public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository repository;
+    private final RoleRepository roleRepo;
 
-    public PersonServiceImpl(PersonRepository repository) {
+    public PersonServiceImpl(PersonRepository repository,RoleRepository roleRepo) {
         this.repository = repository;
+        this.roleRepo = roleRepo;
     }
 
     @Override
@@ -34,8 +39,8 @@ public class PersonServiceImpl implements PersonService {
                             .lastname(form.getLastname())
                             .firstname(form.getFirstname())
                             .country(form.getCountry())
-                            .roles(form.getRoles())
                             .build();
+        toInsert.setRoles(FormConverterList.convertIdList2EntityList(roleRepo,form.getRoles()));
         return PersonDTO.of(repository.save(toInsert));
     }
 
@@ -45,7 +50,7 @@ public class PersonServiceImpl implements PersonService {
         toUpdate.setLastname(form.getLastname());
         toUpdate.setFirstname(form.getFirstname());
         toUpdate.setCountry(form.getCountry());
-        toUpdate.setRoles(form.getRoles());
+        toUpdate.setRoles(FormConverterList.convertIdList2EntityList(roleRepo,form.getRoles()));
         toUpdate = repository.save(toUpdate);
         return PersonDTO.of(toUpdate);
     }

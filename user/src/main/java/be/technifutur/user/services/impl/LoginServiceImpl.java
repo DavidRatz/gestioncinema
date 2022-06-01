@@ -9,14 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
-import be.technifutur.user.config.JwtProperties;
-import be.technifutur.user.models.forms.LoginForm;
+import be.technifutur.sharedclass.forms.LoginForm;
+import be.technifutur.user.configs.JwtProperties;
+import be.technifutur.user.services.LoginService;
 
 @Service
-public class LoginServiceImpl {
+public class LoginServiceImpl implements LoginService {
     @Autowired
     private AuthenticationManager authManager;
 
@@ -26,10 +28,16 @@ public class LoginServiceImpl {
         this.properties = properties;
     }
 
+    @Override
     public String login(LoginForm form){
         Authentication authentication = new UsernamePasswordAuthenticationToken(form.getUsername(), form.getPassword());
 
-        authentication = authManager.authenticate(authentication);
+        try{
+            authentication = authManager.authenticate(authentication);
+        }
+        catch(AuthenticationException ex){
+            System.out.println(ex.getMessage());
+        }
 
         return properties.getPrefix() + JWT.create()
             .withSubject(form.getUsername())

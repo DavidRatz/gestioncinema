@@ -1,4 +1,4 @@
-package be.technifutur.user.config;
+package be.technifutur.user.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import be.technifutur.user.config.security.JwtAuthenticationFilter;
+import be.technifutur.user.configs.security.JwtAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -28,13 +28,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.jwtProperties = jwtProperties;
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-            .withUser("user").password(encoder.encode("pass")).roles("USER")
-            .and()
-            .withUser("admin").password(encoder.encode("pass")).roles("ADMIN");
-    }
+    // @Override
+    // protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    //     auth.inMemoryAuthentication()
+    //         .withUser("user").password(encoder.encode("pass")).roles("USER")
+    //         .and()
+    //         .withUser("admin").password(encoder.encode("pass")).roles("ADMIN");
+    // }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

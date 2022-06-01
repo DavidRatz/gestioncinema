@@ -1,7 +1,7 @@
 package be.technifutur.film.models.dtos;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.*;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,7 +15,7 @@ public class MovieDTO implements Serializable{
     private final UUID ref;
     private final String title;
     private final String description;
-    private final float duration;
+    private final LocalTime duration;
     private final LocalDate releaseDate;
     private final Status status;
     private final List<FormatDTO> formats;

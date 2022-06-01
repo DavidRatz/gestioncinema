@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import be.technifutur.user.models.dtos.UserDTO;
@@ -21,6 +22,8 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Autowired
     private UserRepository uRepo;
+    @Autowired
+    private PasswordEncoder encoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -39,8 +42,16 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public UserDTO insert(UserForm form) {
-        // TODO Auto-generated method stub
-        return null;
+        User toInsert = User.builder()
+                        .lastname(form.getLastname())
+                        .firstname(form.getFirstname())
+                        .email(form.getEmail())
+                        .phoneNumber(form.getPhoneNumber())
+                        .username(form.getUsername())
+                        .password(encoder.encode(form.getPassword()))
+                        .roles(form.getRoles())
+                        .build();
+        return UserDTO.of(uRepo.save(toInsert));
     }
 
     @Override

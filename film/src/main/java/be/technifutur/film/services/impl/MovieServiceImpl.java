@@ -2,20 +2,29 @@ package be.technifutur.film.services.impl;
 
 import be.technifutur.film.models.dtos.MovieDTO;
 import be.technifutur.film.models.forms.MovieForm;
-import be.technifutur.film.models.entities.Movie;
-import be.technifutur.film.models.repositories.MovieRepository;
+import be.technifutur.film.models.entities.*;
+import be.technifutur.film.models.repositories.*;
 import be.technifutur.film.services.MovieService;
+import be.technifutur.film.utils.FormConverterList;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository repository;
+    private final FormatRepository formatRepo;
+    private final GenreRepository genreRepo;
+    private final PersonRepository personRepo;
 
-    public MovieServiceImpl(MovieRepository repository) {
+    public MovieServiceImpl(MovieRepository repository, FormatRepository formatRepo, GenreRepository genreRepo,PersonRepository personRepo) {
         this.repository = repository;
+        this.formatRepo = formatRepo;
+        this.genreRepo = genreRepo;
+        this.personRepo = personRepo;
     }
 
     @Override
@@ -36,10 +45,10 @@ public class MovieServiceImpl implements MovieService {
                             .duration(form.getDuration())
                             .releaseDate(form.getReleaseDate())
                             .status(form.getStatus())
-                            .formats(form.getFormats())
-                            .genres(form.getGenres())
-                            .persons(form.getPersons())
                             .build();
+        toInsert.setFormats(FormConverterList.convertIdList2EntityList(formatRepo,form.getFormats()));
+        toInsert.setGenres(FormConverterList.convertIdList2EntityList(genreRepo,form.getGenres()));
+        toInsert.setPersons(FormConverterList.convertIdList2EntityList(personRepo,form.getPersons()));
         return MovieDTO.of(repository.save(toInsert));
     }
 
@@ -51,9 +60,9 @@ public class MovieServiceImpl implements MovieService {
         toUpdate.setDuration(form.getDuration());
         toUpdate.setReleaseDate(form.getReleaseDate());
         toUpdate.setStatus(form.getStatus());
-        toUpdate.setFormats(form.getFormats());
-        toUpdate.setGenres(form.getGenres());
-        toUpdate.setPersons(form.getPersons());
+        toUpdate.setFormats(FormConverterList.convertIdList2EntityList(formatRepo,form.getFormats()));
+        toUpdate.setGenres(FormConverterList.convertIdList2EntityList(genreRepo,form.getGenres()));
+        toUpdate.setPersons(FormConverterList.convertIdList2EntityList(personRepo,form.getPersons()));
         toUpdate = repository.save(toUpdate);
         return MovieDTO.of(toUpdate);
     }

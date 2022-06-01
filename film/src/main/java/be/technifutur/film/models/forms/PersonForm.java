@@ -10,5 +10,5 @@ public class PersonForm {
     private String lastname;
     private String firstname;
     private String country;
-    private List<Role> roles;
+    private List<Long> roles;
 }

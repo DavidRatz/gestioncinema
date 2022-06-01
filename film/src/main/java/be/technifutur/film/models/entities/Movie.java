@@ -1,6 +1,6 @@
 package be.technifutur.film.models.entities;
 
-import java.time.LocalDate;
+import java.time.*;
 import java.util.List;
 import java.util.UUID;
 import javax.persistence.*;
@@ -22,7 +22,7 @@ public class Movie {
     @Column(nullable = false)
     private String description;
     @Column(nullable = false)
-    private float duration;
+    private LocalTime duration;
     @Column(nullable = false)
     private LocalDate releaseDate;
     @Column(nullable = false)

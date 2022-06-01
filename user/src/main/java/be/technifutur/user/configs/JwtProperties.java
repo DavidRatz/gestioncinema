@@ -1,4 +1,4 @@
-package be.technifutur.user.config;
+package be.technifutur.user.configs;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

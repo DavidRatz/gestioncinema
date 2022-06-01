@@ -14,13 +14,17 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
-		<spring-stream-rabbit.version>3.2.3</spring-stream-rabbit.version>
+		<!-- <spring-stream-rabbit.version>3.2.3</spring-stream-rabbit.version> -->
 	</properties>
 	<dependencies>
 		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+		<!-- <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
 			<version>${spring-stream-rabbit.version}</version>
-        </dependency>
+        </dependency> -->
 	</dependencies>
 </project>

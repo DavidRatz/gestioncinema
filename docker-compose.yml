@@ -69,3 +69,10 @@ services:
       - '8888:8888'
     networks:
       - back-end
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - '9411:9411'
+    networks:
+      - back-end

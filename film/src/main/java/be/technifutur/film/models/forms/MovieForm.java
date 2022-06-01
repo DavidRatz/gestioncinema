@@ -1,6 +1,6 @@
 package be.technifutur.film.models.forms;
 
-import java.time.LocalDate;
+import java.time.*;
 import java.util.List;
 
 import be.technifutur.film.models.entities.*;
@@ -10,10 +10,10 @@ import lombok.Data;
 public class MovieForm {
     private String title;
     private String description;
-    private float duration;
+    private LocalTime duration;
     private LocalDate releaseDate;
     private Status status = Status.SOON;
-    private List<Format> formats;
-    private List<Genre> genres;
-    private List<Person> persons;
+    private List<Long> formats;
+    private List<Long> genres;
+    private List<Long> persons;
 }

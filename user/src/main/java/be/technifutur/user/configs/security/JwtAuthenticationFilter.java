@@ -1,4 +1,4 @@
-package be.technifutur.user.config.security;
+package be.technifutur.user.configs.security;
 
 import java.io.IOException;
 import java.util.Date;
@@ -19,7 +19,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import be.technifutur.user.config.JwtProperties;
+import be.technifutur.user.configs.JwtProperties;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
