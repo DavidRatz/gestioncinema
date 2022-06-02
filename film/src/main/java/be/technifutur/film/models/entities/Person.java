@@ -19,6 +19,7 @@ public class Person {
     private String firstname;
     @Column(nullable = false)
     private String country;
-    @OneToMany(targetEntity = Role.class)
+    @ManyToMany
+    @JoinTable(name="Person_Role")
     private List<Role> roles;
 }

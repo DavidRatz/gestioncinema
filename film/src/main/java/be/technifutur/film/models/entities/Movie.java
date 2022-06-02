@@ -16,7 +16,8 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, unique = true)
-    private UUID ref;
+    @Builder.Default
+    private UUID ref = UUID.randomUUID();
     @Column(nullable = false)
     private String title;
     @Column(nullable = false)

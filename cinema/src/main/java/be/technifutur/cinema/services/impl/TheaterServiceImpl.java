@@ -64,8 +64,9 @@ public class TheaterServiceImpl implements TheaterService {
         address2Update.setCountry(form.getAddress().getCountry());
         address2Update = addressRepo.save(address2Update);
 
-        toUpdate = repository.save(toUpdate);
         toUpdate.setAddress(address2Update);
+        toUpdate = repository.save(toUpdate);
+        
 
         return TheaterDTO.of(toUpdate);
     }
