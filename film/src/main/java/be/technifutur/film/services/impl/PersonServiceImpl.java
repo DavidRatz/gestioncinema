@@ -2,6 +2,7 @@ package be.technifutur.film.services.impl;
 
 import be.technifutur.film.models.dtos.PersonDTO;
 import be.technifutur.film.models.forms.PersonForm;
+import be.technifutur.film.models.forms.PersonRoleForm;
 import be.technifutur.film.models.entities.Person;
 import be.technifutur.film.models.repositories.PersonRepository;
 import be.technifutur.film.models.repositories.RoleRepository;
@@ -50,6 +51,14 @@ public class PersonServiceImpl implements PersonService {
         toUpdate.setLastname(form.getLastname());
         toUpdate.setFirstname(form.getFirstname());
         toUpdate.setCountry(form.getCountry());
+        toUpdate.setRoles(FormConverterList.convertIdList2EntityList(roleRepo,form.getRoles()));
+        toUpdate = repository.save(toUpdate);
+        return PersonDTO.of(toUpdate);
+    }
+
+    @Override
+    public PersonDTO patchRoles(Long id, PersonRoleForm form) {
+        Person toUpdate = repository.findById(id).orElseThrow();
         toUpdate.setRoles(FormConverterList.convertIdList2EntityList(roleRepo,form.getRoles()));
         toUpdate = repository.save(toUpdate);
         return PersonDTO.of(toUpdate);

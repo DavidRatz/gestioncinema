@@ -12,7 +12,7 @@ import lombok.*;
 public class RoomDTO {
     private final Long id;
     private final UUID ref;
-    private final String number;
+    private final int number;
     private final int numberSeats;
     private final boolean active;
     private final TheaterDTO theater;

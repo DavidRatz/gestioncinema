@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 public class RoomForm {
-    private String number;
+    private int number;
     private int numberSeats;
     private Long theater;
     private List<Long> features;

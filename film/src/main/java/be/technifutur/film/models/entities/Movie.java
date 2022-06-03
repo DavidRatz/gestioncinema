@@ -20,7 +20,7 @@ public class Movie {
     private UUID ref = UUID.randomUUID();
     @Column(nullable = false)
     private String title;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "longtext")
     private String description;
     @Column(nullable = false)
     private LocalTime duration;

@@ -2,6 +2,9 @@ package be.technifutur.film.services.impl;
 
 import be.technifutur.film.models.dtos.MovieDTO;
 import be.technifutur.film.models.forms.MovieForm;
+import be.technifutur.film.models.forms.MovieFormatForm;
+import be.technifutur.film.models.forms.MovieGenreForm;
+import be.technifutur.film.models.forms.MoviePersonForm;
 import be.technifutur.film.models.entities.*;
 import be.technifutur.film.models.repositories.*;
 import be.technifutur.film.services.MovieService;
@@ -62,6 +65,31 @@ public class MovieServiceImpl implements MovieService {
         toUpdate.setStatus(form.getStatus());
         toUpdate.setFormats(FormConverterList.convertIdList2EntityList(formatRepo,form.getFormats()));
         toUpdate.setGenres(FormConverterList.convertIdList2EntityList(genreRepo,form.getGenres()));
+        toUpdate.setPersons(FormConverterList.convertIdList2EntityList(personRepo,form.getPersons()));
+        toUpdate = repository.save(toUpdate);
+        return MovieDTO.of(toUpdate);
+    }
+
+    
+    @Override
+    public MovieDTO patchFormats(Long id, MovieFormatForm form) {
+        Movie toUpdate = repository.findById(id).orElseThrow();
+        toUpdate.setFormats(FormConverterList.convertIdList2EntityList(formatRepo,form.getFormats()));
+        toUpdate = repository.save(toUpdate);
+        return MovieDTO.of(toUpdate);
+    }
+
+    @Override
+    public MovieDTO patchGenres(Long id, MovieGenreForm form) {
+        Movie toUpdate = repository.findById(id).orElseThrow();
+        toUpdate.setGenres(FormConverterList.convertIdList2EntityList(genreRepo,form.getGenres()));
+        toUpdate = repository.save(toUpdate);
+        return MovieDTO.of(toUpdate);
+    }
+
+    @Override
+    public MovieDTO patchPersons(Long id, MoviePersonForm form) {
+        Movie toUpdate = repository.findById(id).orElseThrow();
         toUpdate.setPersons(FormConverterList.convertIdList2EntityList(personRepo,form.getPersons()));
         toUpdate = repository.save(toUpdate);
         return MovieDTO.of(toUpdate);

@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import be.technifutur.film.models.dtos.PersonDTO;
-import be.technifutur.film.models.forms.PersonForm;
+import be.technifutur.film.models.forms.*;
 import be.technifutur.film.services.PersonService;
 
 @RestController
@@ -32,6 +32,11 @@ public class PersonController {
     @PutMapping("/{id}")
     public PersonDTO putPerson(@PathVariable Long id, @RequestBody PersonForm personForm) {
         return service.update(id, personForm);
+    }
+
+    @PatchMapping("/{id}/roles")
+    public PersonDTO patchRolesPerson(@PathVariable Long id, @RequestBody PersonRoleForm personRoleForm) {
+        return service.patchRoles(id, personRoleForm);
     }
 
     @DeleteMapping("/{id}")

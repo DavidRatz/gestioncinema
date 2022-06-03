@@ -18,7 +18,7 @@ public class Room {
     @Builder.Default
     private UUID ref = UUID.randomUUID();
     @Column(nullable = false)
-    private String number;
+    private int number;
     @Column(nullable = false)
     private int numberSeats;
     @Column(nullable = false)

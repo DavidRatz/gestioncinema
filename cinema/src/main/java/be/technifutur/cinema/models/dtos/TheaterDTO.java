@@ -42,7 +42,7 @@ public class TheaterDTO implements Serializable {
     public static class RoomDTO{
         private final Long id;
         private final UUID ref;
-        private final String number;
+        private final int number;
         private final int numberSeats;
         private final boolean active;
         private final List<FeatureDTO> features;

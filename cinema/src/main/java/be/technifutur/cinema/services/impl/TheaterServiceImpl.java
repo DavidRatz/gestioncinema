@@ -56,7 +56,7 @@ public class TheaterServiceImpl implements TheaterService {
         toUpdate.setDateCreation(form.getDateCreation());
         toUpdate.setPhoneNumber(form.getPhoneNumber());
 
-        Address address2Update = addressRepo.findByTheater(id).orElseThrow();
+        Address address2Update = addressRepo.findById(toUpdate.getAddress().getId()).orElseThrow();
         address2Update.setStreet(form.getAddress().getStreet());
         address2Update.setNumber(form.getAddress().getNumber());
         address2Update.setPostCode(form.getAddress().getPostCode());
