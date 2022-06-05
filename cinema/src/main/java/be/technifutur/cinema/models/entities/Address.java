@@ -22,6 +22,4 @@ public class Address {
     private String city;
     @Column(nullable = false)
     private String country;
-    @OneToOne
-    private Theater theater;
 }

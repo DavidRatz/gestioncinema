@@ -1,15 +1,67 @@
 spring:
-	application:
-		name: apigateway-service
-	profiles:
-		active: dev
-	config:
-		import: configserver:http://root:s3cr3t@localhost:8888
+  application:
+    name: apigateway-service
+  profiles:
+    active: dev
+  config:
+    import: configserver:http://root:s3cr3t@localhost:8888
   cloud:
     gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping : true
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:4200"
+            allowedMethods:
+            - GET
+            - POST
+            - DELETE
+            - PATCH
+            - PUT        
+            allowedHeaders:
+            - Content-Type  
+            - X-Requested-With 
+            - Origin
+            - Accept
+            - Authorization
+            exposedHeaders:
+            - Authorization 
       routes:
-        # - id: to-facture
-        #   uri: lb://facture-service
-        #   predicates:
-        #     - Path=/facture/**
-        #     - Method=GET,POST
+        - id: to-movie
+          uri: lb://film-service
+          predicates:
+            - Path=/movie/**, /genre/**, /format/**, /person/**, /role/**
+            - Method=GET,POST,PATCH,PUT,DELETE
+          filters:
+            - name: Logger
+        - id: to-theater
+          uri: lb://cinema-service
+          predicates:
+            - Path=/theater/**, /feature/**, /room/**
+            - Method=GET,POST,PATCH,PUT,DELETE
+          filters:
+            - name: Logger
+        - id: to-user
+          uri: lb://user-service
+          predicates:
+            - Path=/user/**, /cart/**
+            - Method=GET,POST,PATCH,PUT,DELETE
+          filters:
+            - name: Logger
+        - id: to-session
+          uri: lb://programmation-service
+          predicates:
+            - Path=/session/**
+            - Method=GET,POST,PATCH,PUT,DELETE
+          filters:
+            - name: Logger
+        - id: to-reservation
+          uri: lb://reservation-service
+          predicates:
+            - Path=/ticket/**
+            - Method=GET,POST,PATCH,PUT,DELETE
+          filters:
+            - name: Logger
+      discovery:
+        locator:
+          enabled: true

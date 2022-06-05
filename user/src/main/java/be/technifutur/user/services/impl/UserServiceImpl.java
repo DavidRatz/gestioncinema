@@ -56,8 +56,16 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public UserDTO update(Long id, UserForm form) {
-        // TODO Auto-generated method stub
-        return null;
+        User toUpdate = uRepo.findById(id).orElseThrow();
+        toUpdate.setLastname(form.getLastname());
+        toUpdate.setFirstname(form.getFirstname());
+        toUpdate.setEmail(form.getEmail());
+        toUpdate.setPhoneNumber(form.getPhoneNumber());
+        toUpdate.setUsername(form.getUsername());
+        toUpdate.setPassword(encoder.encode(form.getPassword()));
+        toUpdate.setRoles(form.getRoles());
+        toUpdate = uRepo.save(toUpdate);
+        return UserDTO.of(toUpdate);
     }
 
     @Override
