@@ -22,6 +22,8 @@ public class Session {
     private UUID refRoom;
     @Column(nullable = false, unique = true)
     private UUID refMovie;
+    @Column(nullable = false, unique = true)
+    private UUID refTheater;
     @Column(nullable = false)
     private LocalDate date;
     @Column(nullable = false)

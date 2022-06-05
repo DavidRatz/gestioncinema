@@ -31,15 +31,23 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public SessionDTO insert(SessionForm form) {
         Session toInsert = Session.builder()
-    //set value;
-                                .build();
+                            .refMovie(form.getRefMovie())
+                            .refRoom(form.getRefRoom())
+                            .refTheater(form.getRefTheater())
+                            .date(form.getDate())
+                            .hour(form.getHour())
+                            .build();
         return SessionDTO.of(repository.save(toInsert));
     }
 
     @Override
     public SessionDTO update(Long id, SessionForm form) {
         Session toUpdate = repository.findById(id).orElseThrow();
-    //set value;
+        toUpdate.setRefMovie(form.getRefMovie());
+        toUpdate.setRefRoom(form.getRefRoom());
+        toUpdate.setRefTheater(form.getRefTheater());
+        toUpdate.setDate(form.getDate());
+        toUpdate.setHour(form.getHour());
         toUpdate = repository.save(toUpdate);
         return SessionDTO.of(toUpdate);
     }
