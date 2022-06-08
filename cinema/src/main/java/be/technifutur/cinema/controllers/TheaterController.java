@@ -24,7 +24,7 @@ public class TheaterController {
         return service.getOne(id);
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public TheaterDTO postTheater(@RequestBody TheaterForm theaterForm) {
         return service.insert(theaterForm);
     }

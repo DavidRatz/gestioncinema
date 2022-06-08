@@ -24,7 +24,7 @@ public class UserController {
         return service.getOne(id);
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public UserDTO postUser(@RequestBody UserForm userForm) {
         return service.insert(userForm);
     }

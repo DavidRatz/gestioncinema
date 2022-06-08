@@ -24,7 +24,7 @@ public class TicketController {
         return service.getOne(id);
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public TicketDTO postTicket(@RequestBody TicketForm ticketForm) {
         return service.insert(ticketForm);
     }

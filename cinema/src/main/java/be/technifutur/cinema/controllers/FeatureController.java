@@ -24,7 +24,7 @@ public class FeatureController {
         return service.getOne(id);
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public FeatureDTO postFeature(@RequestBody FeatureForm featureForm) {
         return service.insert(featureForm);
     }

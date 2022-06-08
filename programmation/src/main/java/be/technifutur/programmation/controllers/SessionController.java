@@ -24,7 +24,7 @@ public class SessionController {
         return service.getOne(id);
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public SessionDTO postSession(@RequestBody SessionForm sessionForm) {
         return service.insert(sessionForm);
     }

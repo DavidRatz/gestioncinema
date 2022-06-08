@@ -4,6 +4,75 @@ networks:
   back-end:
     driver: bridge
 services:
+  apigateway:
+    container_name: "apigateway"
+    build: ./apigateway
+    ports:
+      - '8080:8080'
+    networks:
+      - back-end
+    depends_on:
+      - consul-server
+      - configurationserver
+  cinema:
+    container_name: "cinema"
+    build: ./cinema
+    ports:
+      - '8181:8181'
+    depends_on:
+      - consul-server
+      - configurationserver
+    networks:
+      - back-end
+  film:
+    container_name: "film"
+    build: ./film
+    ports:
+      - '8282:8282'
+    depends_on:
+      - consul-server
+      - configurationserver
+    networks:
+      - back-end
+  programmation:
+    container_name: "programmation"
+    build: ./programmation
+    ports:
+      - '8383:8383'
+    depends_on:
+      - consul-server
+      - configurationserver
+    networks:
+      - back-end
+  reservation:
+    container_name: "reservation"
+    build: ./reservation
+    ports:
+      - '8484:8484'
+    depends_on:
+      - rabbitmq
+      - consul-server
+      - configurationserver
+    networks:
+      - back-end
+  user:
+    container_name: "user"
+    build: ./user
+    ports:
+      - '8585:8585'
+    depends_on:
+      - rabbitmq
+      - consul-server
+      - configurationserver
+    networks:
+      - back-end
+  configurationserver:
+    container_name: "configurationserver"
+    build: ./configurationserver
+    ports:
+      - '8888:8888'
+    networks:
+      - back-end
   rabbitmq:
     container_name: "rabbitmq"
     image: rabbitmq:3.9-management-alpine
@@ -17,56 +86,11 @@ services:
       - '15672:15672'
     networks:
       - back-end
-  facture:
-    container_name: "facture"
-    build: ./facture
-    ports:
-      - '8081:8081'
-    depends_on:
-      - rabbitmq
-      - consul-server
-    networks:
-      - back-end
-  reservation:
-    container_name: "reservation"
-    build: ./reservation
-    ports:
-      - '8082:8082'
-    depends_on:
-      - rabbitmq
-      - consul-server
-    networks:
-      - back-end
-  user:
-    container_name: "user"
-    build: ./user
-    ports:
-      - '8083:8083'
-    depends_on:
-      - consul-server
-    networks:
-      - back-end
-  apigateway-2:
-    container_name: "apigateway-2"
-    build: ./ApiGatewayV2
-    ports:
-      - '8080:8080'
-    networks:
-      - back-end
-    depends_on:
-      - consul-server
   consul-server:
     container_name: "consul_server"
     image: consul
     ports:
       - "8500:8500"
-    networks:
-      - back-end
-  configurationserver:
-    container_name: "configurationserver"
-    build: ./configurationserver
-    ports:
-      - '8888:8888'
     networks:
       - back-end
   zipkin:
@@ -76,3 +100,5 @@ services:
       - '9411:9411'
     networks:
       - back-end
+  
+  

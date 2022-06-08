@@ -24,7 +24,7 @@ public class PersonController {
         return service.getOne(id);
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public PersonDTO postPerson(@RequestBody PersonForm personForm) {
         return service.insert(personForm);
     }

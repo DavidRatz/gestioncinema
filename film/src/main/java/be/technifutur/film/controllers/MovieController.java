@@ -24,7 +24,7 @@ public class MovieController {
         return service.getOne(id);
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public MovieDTO postMovie(@RequestBody MovieForm movieForm) {
         return service.insert(movieForm);
     }

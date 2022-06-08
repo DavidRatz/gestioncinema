@@ -24,7 +24,7 @@ public class RoleController {
         return service.getOne(id);
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public RoleDTO postRole(@RequestBody RoleForm roleForm) {
         return service.insert(roleForm);
     }

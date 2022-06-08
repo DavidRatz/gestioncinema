@@ -24,7 +24,7 @@ public class GenreController {
         return service.getOne(id);
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public GenreDTO postGenre(@RequestBody GenreForm genreForm) {
         return service.insert(genreForm);
     }
