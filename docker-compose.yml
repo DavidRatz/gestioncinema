@@ -22,6 +22,7 @@ services:
     depends_on:
       - consul-server
       - configurationserver
+      - dbcinema
     networks:
       - back-end
   film:
@@ -32,6 +33,7 @@ services:
     depends_on:
       - consul-server
       - configurationserver
+      - dbfilm
     networks:
       - back-end
   programmation:
@@ -42,6 +44,7 @@ services:
     depends_on:
       - consul-server
       - configurationserver
+      - dbprogrammation
     networks:
       - back-end
   reservation:
@@ -53,6 +56,7 @@ services:
       - rabbitmq
       - consul-server
       - configurationserver
+      - dbreservation
     networks:
       - back-end
   user:
@@ -64,6 +68,7 @@ services:
       - rabbitmq
       - consul-server
       - configurationserver
+      - dbuser
     networks:
       - back-end
   configurationserver:
@@ -98,6 +103,51 @@ services:
     container_name: zipkin
     ports:
       - '9411:9411'
+    networks:
+      - back-end
+  dbcinema:
+    image: mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_DATABASE: gestioncinema_cinema
+    ports:
+      - "3308:3306"
+    networks:
+      - back-end
+  dbfilm:
+    image: mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_DATABASE: gestioncinema_film
+    ports:
+      - "3309:3306"
+    networks:
+      - back-end
+  dbprogrammation:
+    image: mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_DATABASE: gestioncinema_programmation
+    ports:
+      - "3310:3306"
+    networks:
+      - back-end
+  dbreservation:
+    image: mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_DATABASE: gestioncinema_reservation
+    ports:
+      - "3311:3306"
+    networks:
+      - back-end
+  dbuser:
+    image: mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_DATABASE: gestioncinema_user
+    ports:
+      - "3312:3306"
     networks:
       - back-end
   
