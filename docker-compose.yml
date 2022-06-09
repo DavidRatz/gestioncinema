@@ -79,9 +79,10 @@ services:
     ports:
       - '8585:8585'
     depends_on:
+      - configurationserver
       - rabbitmq
       - consul-server
-      - configurationserver
+      - zipkin
       - dbuser
     networks:
       - back-end
@@ -123,8 +124,11 @@ services:
   dbcinema:
     image: mysql
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
       MYSQL_DATABASE: gestioncinema_cinema
+      MYSQL_ROOT_HOST: '%'
     ports:
       - "3308:3306"
     networks:
@@ -136,6 +140,7 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: user
       MYSQL_DATABASE: gestioncinema_film
+      MYSQL_ROOT_HOST: '%'
     ports:
       - "3309:3306"
     networks:
@@ -143,8 +148,11 @@ services:
   dbprogrammation:
     image: mysql
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
       MYSQL_DATABASE: gestioncinema_programmation
+      MYSQL_ROOT_HOST: '%'
     ports:
       - "3310:3306"
     networks:
@@ -152,8 +160,11 @@ services:
   dbreservation:
     image: mysql
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
       MYSQL_DATABASE: gestioncinema_reservation
+      MYSQL_ROOT_HOST: '%'
     ports:
       - "3311:3306"
     networks:
@@ -165,6 +176,7 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: user
       MYSQL_DATABASE: gestioncinema_user
+      MYSQL_ROOT_HOST: '%'
     ports:
       - "3312:3306"
     networks:
