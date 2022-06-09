@@ -41,6 +41,11 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
+    public UserDTO getUserByUsername(String username) {
+        return uRepo.findByUsername(username).map(UserDTO::of).orElseThrow();
+    }
+
+    @Override
     public UserDTO insert(UserForm form) {
         User toInsert = User.builder()
                         .lastname(form.getLastname())

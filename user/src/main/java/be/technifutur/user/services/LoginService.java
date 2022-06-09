@@ -1,7 +1,8 @@
 package be.technifutur.user.services;
 
 import be.technifutur.sharedclass.forms.LoginForm;
+import be.technifutur.user.models.dtos.JwtDTO;
 
 public interface LoginService {
-    public String login(LoginForm form);
+    public JwtDTO login(LoginForm form);
 }

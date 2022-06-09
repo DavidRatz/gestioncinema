@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
 import be.technifutur.sharedclass.forms.LoginForm;
+import be.technifutur.user.models.dtos.JwtDTO;
 import be.technifutur.user.models.dtos.UserDTO;
 import be.technifutur.user.models.entities.User;
 import be.technifutur.user.models.repositories.UserRepository;
@@ -23,7 +24,7 @@ public class LoginController {
     }
     
     @PostMapping
-    public String login(@RequestBody LoginForm form){
+    public JwtDTO login(@RequestBody LoginForm form){
         return service.login(form);
     }
 

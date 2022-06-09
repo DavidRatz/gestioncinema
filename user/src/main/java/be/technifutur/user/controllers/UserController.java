@@ -14,7 +14,7 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @GetMapping()
+    @GetMapping
     public List<UserDTO> getAllUsers() {
         return service.getAll();
     }
@@ -22,6 +22,11 @@ public class UserController {
     @GetMapping("/{id}")
     public UserDTO getUser(@PathVariable Long id) {
         return service.getOne(id);
+    }
+
+    @GetMapping(params = "username")
+    public UserDTO getUserByUsername(@RequestParam String username) {
+        return service.getUserByUsername(username);
     }
 
     @PostMapping

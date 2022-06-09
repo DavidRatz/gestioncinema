@@ -10,4 +10,5 @@ public interface UserService {
     UserDTO insert(UserForm form);
     UserDTO delete(Long id);
     UserDTO update(Long id, UserForm form);
+    UserDTO getUserByUsername(String username);
 }

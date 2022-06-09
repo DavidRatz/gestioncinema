@@ -11,7 +11,8 @@ spring:
         add-to-simple-url-handler-mapping : true
         cors-configurations:
           '[/**]':
-            allowedOrigins: "http://localhost:4200"
+            allowedOrigins: "http://10.26.128.3:4200"
+            allowedCredentials: true
             allowedMethods:
             - GET
             - POST
@@ -44,7 +45,7 @@ spring:
         - id: to-user
           uri: lb://user-service
           predicates:
-            - Path=/user/**, /cart/**
+            - Path=/user/**, /cart/**, /login/**
             - Method=GET,POST,PATCH,PUT,DELETE
           filters:
             - name: Logger

@@ -3,9 +3,19 @@ version: "3.9"
 networks:
   back-end:
     driver: bridge
+  dbfilm:
+    driver: bridge
+  dbuser:
+    driver: bridge
+  dbcinema:
+    driver: bridge
+  dbprogrammation:
+    driver: bridge
+  dbreservation:
+    driver: bridge
 services:
   apigateway:
-    container_name: "apigateway"
+    container_name: "gestioncinema_apigateway"
     build: ./apigateway
     ports:
       - '8080:8080'
@@ -15,7 +25,7 @@ services:
       - consul-server
       - configurationserver
   cinema:
-    container_name: "cinema"
+    container_name: "gestioncinema_cinema"
     build: ./cinema
     ports:
       - '8181:8181'
@@ -25,8 +35,9 @@ services:
       - dbcinema
     networks:
       - back-end
+      - dbcinema
   film:
-    container_name: "film"
+    container_name: "gestioncinema_film"
     build: ./film
     ports:
       - '8282:8282'
@@ -36,8 +47,9 @@ services:
       - dbfilm
     networks:
       - back-end
+      - dbfilm
   programmation:
-    container_name: "programmation"
+    container_name: "gestioncinema_programmation"
     build: ./programmation
     ports:
       - '8383:8383'
@@ -47,8 +59,9 @@ services:
       - dbprogrammation
     networks:
       - back-end
+      - dbprogrammation
   reservation:
-    container_name: "reservation"
+    container_name: "gestioncinema_reservation"
     build: ./reservation
     ports:
       - '8484:8484'
@@ -59,8 +72,9 @@ services:
       - dbreservation
     networks:
       - back-end
+      - dbreservation
   user:
-    container_name: "user"
+    container_name: "gestioncinema_user"
     build: ./user
     ports:
       - '8585:8585'
@@ -71,15 +85,16 @@ services:
       - dbuser
     networks:
       - back-end
+      - dbuser
   configurationserver:
-    container_name: "configurationserver"
+    container_name: "gestioncinema_configurationserver"
     build: ./configurationserver
     ports:
       - '8888:8888'
     networks:
       - back-end
   rabbitmq:
-    container_name: "rabbitmq"
+    container_name: "gestioncinema_rabbitmq"
     image: rabbitmq:3.9-management-alpine
     # environment:
     #   - RABBITMQ_DEFAULT_USER=david
@@ -92,15 +107,15 @@ services:
     networks:
       - back-end
   consul-server:
-    container_name: "consul_server"
+    container_name: "gestioncinema_consul_server"
     image: consul
     ports:
       - "8500:8500"
     networks:
       - back-end
   zipkin:
+    container_name: "gestioncinema_zipkin"
     image: openzipkin/zipkin
-    container_name: zipkin
     ports:
       - '9411:9411'
     networks:
@@ -113,16 +128,18 @@ services:
     ports:
       - "3308:3306"
     networks:
-      - back-end
+      - dbcinema
   dbfilm:
     image: mysql
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
       MYSQL_DATABASE: gestioncinema_film
     ports:
       - "3309:3306"
     networks:
-      - back-end
+      - dbfilm
   dbprogrammation:
     image: mysql
     environment:
@@ -131,7 +148,7 @@ services:
     ports:
       - "3310:3306"
     networks:
-      - back-end
+      - dbprogrammation
   dbreservation:
     image: mysql
     environment:
@@ -140,15 +157,17 @@ services:
     ports:
       - "3311:3306"
     networks:
-      - back-end
+      - dbreservation
   dbuser:
     image: mysql
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
       MYSQL_DATABASE: gestioncinema_user
     ports:
       - "3312:3306"
     networks:
-      - back-end
+      - dbuser
   
   

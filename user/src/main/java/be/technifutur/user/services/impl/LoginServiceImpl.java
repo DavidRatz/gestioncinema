@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import be.technifutur.sharedclass.forms.LoginForm;
 import be.technifutur.user.configs.JwtProperties;
+import be.technifutur.user.models.dtos.JwtDTO;
 import be.technifutur.user.services.LoginService;
 
 @Service
@@ -29,7 +30,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public String login(LoginForm form){
+    public JwtDTO login(LoginForm form){
         Authentication authentication = new UsernamePasswordAuthenticationToken(form.getUsername(), form.getPassword());
 
         try{
@@ -39,11 +40,15 @@ public class LoginServiceImpl implements LoginService {
             System.out.println(ex.getMessage());
         }
 
-        return properties.getPrefix() + JWT.create()
+        String jwt = properties.getPrefix() + JWT.create()
             .withSubject(form.getUsername())
             .withIssuedAt(new Date())
             .withExpiresAt(new Date(System.currentTimeMillis() + properties.getExpires()))
             .withClaim("roles", authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList())
-            .sign(Algorithm.HMAC512(properties.getSecret()));        
+            .sign(Algorithm.HMAC512(properties.getSecret()));    
+        return JwtDTO.builder()
+            .username(form.getUsername())
+            .jwt(jwt)
+            .build();    
     }
 }
