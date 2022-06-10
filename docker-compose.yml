@@ -17,6 +17,7 @@ services:
   apigateway:
     container_name: "gestioncinema_apigateway"
     build: ./apigateway
+    restart: always
     ports:
       - '8080:8080'
     networks:
@@ -24,9 +25,18 @@ services:
     depends_on:
       - consul-server
       - configurationserver
+      # - cinema
+      # - film
+      # - programmation
+      # - reservation
+      # - user
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    command: --spring.profiles.active=$${SPRING_PROFILES_ACTIVE}
   cinema:
     container_name: "gestioncinema_cinema"
     build: ./cinema
+    restart: always
     ports:
       - '8181:8181'
     depends_on:
@@ -36,9 +46,13 @@ services:
     networks:
       - back-end
       - dbcinema
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    command: --spring.profiles.active=$${SPRING_PROFILES_ACTIVE}
   film:
     container_name: "gestioncinema_film"
     build: ./film
+    restart: always
     ports:
       - '8282:8282'
     depends_on:
@@ -48,9 +62,13 @@ services:
     networks:
       - back-end
       - dbfilm
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    command: --spring.profiles.active=$${SPRING_PROFILES_ACTIVE}
   programmation:
     container_name: "gestioncinema_programmation"
     build: ./programmation
+    restart: always
     ports:
       - '8383:8383'
     depends_on:
@@ -60,9 +78,13 @@ services:
     networks:
       - back-end
       - dbprogrammation
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    command: --spring.profiles.active=$${SPRING_PROFILES_ACTIVE}
   reservation:
     container_name: "gestioncinema_reservation"
     build: ./reservation
+    restart: always
     ports:
       - '8484:8484'
     depends_on:
@@ -73,25 +95,33 @@ services:
     networks:
       - back-end
       - dbreservation
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    command: --spring.profiles.active=$${SPRING_PROFILES_ACTIVE}
   user:
     container_name: "gestioncinema_user"
     build: ./user
+    restart: always
     ports:
       - '8585:8585'
     depends_on:
+      - dbuser
       - configurationserver
       - rabbitmq
       - consul-server
       - zipkin
-      - dbuser
     networks:
       - back-end
       - dbuser
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    command: --spring.profiles.active=$${SPRING_PROFILES_ACTIVE}
   configurationserver:
     container_name: "gestioncinema_configurationserver"
     build: ./configurationserver
     ports:
       - '8888:8888'
+    restart: always
     networks:
       - back-end
   rabbitmq:
