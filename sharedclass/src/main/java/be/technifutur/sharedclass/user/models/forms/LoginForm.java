@@ -1,4 +1,4 @@
-package be.technifutur.sharedclass.forms;
+package be.technifutur.sharedclass.user.models.forms;
 
 import lombok.*;
 

@@ -4,4 +4,4 @@ spring:
   profiles:
     active: @activatedProperties@
   config:
-    import: configserver:http://root:s3cr3t@configurationserver:8888
+    import: configserver:@configurationserver@

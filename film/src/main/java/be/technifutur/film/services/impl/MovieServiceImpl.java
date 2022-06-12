@@ -1,16 +1,15 @@
 package be.technifutur.film.services.impl;
 
-import be.technifutur.film.models.dtos.MovieDTO;
 import be.technifutur.film.models.forms.MovieForm;
 import be.technifutur.film.models.forms.MovieFormatForm;
 import be.technifutur.film.models.forms.MovieGenreForm;
 import be.technifutur.film.models.forms.MoviePersonForm;
-import be.technifutur.film.models.entities.*;
 import be.technifutur.film.models.repositories.*;
 import be.technifutur.film.services.MovieService;
 import be.technifutur.film.utils.FormConverterList;
+import be.technifutur.sharedclass.film.models.dtos.MovieDTO;
+import be.technifutur.sharedclass.film.models.entities.Movie;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -38,6 +37,11 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public MovieDTO getOne(Long id) {
         return repository.findById(id).map(MovieDTO::of).orElseThrow();
+    }
+
+    @Override
+    public MovieDTO getByRef(UUID ref) {
+        return repository.findByRef(ref).map(MovieDTO::of).orElseThrow();
     }
 
     @Override

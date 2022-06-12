@@ -1,11 +1,14 @@
 package be.technifutur.film.controllers;
 
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import be.technifutur.film.models.dtos.MovieDTO;
+
 import be.technifutur.film.models.forms.*;
 import be.technifutur.film.services.MovieService;
+import be.technifutur.sharedclass.film.models.dtos.MovieDTO;
 
 @RestController
 @RequestMapping("/movie")
@@ -22,6 +25,11 @@ public class MovieController {
     @GetMapping("/{id}")
     public MovieDTO getMovie(@PathVariable Long id) {
         return service.getOne(id);
+    }
+
+    @GetMapping("/{ref}")
+    public MovieDTO getMovieByRef(@PathVariable UUID ref) {
+        return service.getByRef(ref);
     }
 
     @PostMapping

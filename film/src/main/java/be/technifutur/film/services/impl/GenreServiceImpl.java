@@ -2,9 +2,10 @@ package be.technifutur.film.services.impl;
 
 import be.technifutur.film.models.dtos.GenreDTO;
 import be.technifutur.film.models.forms.GenreForm;
-import be.technifutur.film.models.entities.Genre;
 import be.technifutur.film.models.repositories.GenreRepository;
 import be.technifutur.film.services.GenreService;
+import be.technifutur.sharedclass.film.models.entities.Genre;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;

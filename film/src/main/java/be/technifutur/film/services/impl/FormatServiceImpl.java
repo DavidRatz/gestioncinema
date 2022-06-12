@@ -2,9 +2,10 @@ package be.technifutur.film.services.impl;
 
 import be.technifutur.film.models.dtos.FormatDTO;
 import be.technifutur.film.models.forms.FormatForm;
-import be.technifutur.film.models.entities.Format;
 import be.technifutur.film.models.repositories.FormatRepository;
 import be.technifutur.film.services.FormatService;
+import be.technifutur.sharedclass.film.models.entities.Format;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;

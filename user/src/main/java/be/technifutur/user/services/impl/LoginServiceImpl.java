@@ -13,7 +13,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
-import be.technifutur.sharedclass.forms.LoginForm;
+import be.technifutur.sharedclass.user.models.forms.LoginForm;
 import be.technifutur.user.configs.JwtProperties;
 import be.technifutur.user.models.dtos.JwtDTO;
 import be.technifutur.user.services.LoginService;

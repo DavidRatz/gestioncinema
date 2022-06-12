@@ -87,6 +87,7 @@
 			<id>dev</id>
 			<properties>
 				<activatedProperties>dev</activatedProperties>
+				<configurationserver>http://root:s3cr3t@localhost:8888</configurationserver>
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
@@ -96,6 +97,7 @@
 			<id>prod</id>
 			<properties>
 				<activatedProperties>prod</activatedProperties>
+				<configurationserver>http://root:s3cr3t@configurationserver:8888</configurationserver>
 			</properties>
 		</profile>
 	</profiles>

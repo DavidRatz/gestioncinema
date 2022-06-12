@@ -3,11 +3,11 @@ package be.technifutur.film.services.impl;
 import be.technifutur.film.models.dtos.PersonDTO;
 import be.technifutur.film.models.forms.PersonForm;
 import be.technifutur.film.models.forms.PersonRoleForm;
-import be.technifutur.film.models.entities.Person;
 import be.technifutur.film.models.repositories.PersonRepository;
 import be.technifutur.film.models.repositories.RoleRepository;
 import be.technifutur.film.services.PersonService;
 import be.technifutur.film.utils.FormConverterList;
+import be.technifutur.sharedclass.film.models.entities.Person;
 
 import org.springframework.stereotype.Service;
 

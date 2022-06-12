@@ -1,4 +1,4 @@
-package be.technifutur.sharedclass.dtos;
+package be.technifutur.sharedclass.user.models.dtos;
 
 import java.util.List;
 

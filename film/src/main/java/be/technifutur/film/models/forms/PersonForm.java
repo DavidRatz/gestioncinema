@@ -2,7 +2,7 @@ package be.technifutur.film.models.forms;
 
 import java.util.List;
 
-import be.technifutur.film.models.entities.Role;
+import be.technifutur.sharedclass.film.models.entities.Role;
 import lombok.Data;
 
 @Data

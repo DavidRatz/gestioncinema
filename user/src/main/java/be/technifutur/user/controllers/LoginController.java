@@ -5,7 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
-import be.technifutur.sharedclass.forms.LoginForm;
+import be.technifutur.sharedclass.user.models.forms.LoginForm;
 import be.technifutur.user.models.dtos.JwtDTO;
 import be.technifutur.user.models.dtos.UserDTO;
 import be.technifutur.user.models.entities.User;

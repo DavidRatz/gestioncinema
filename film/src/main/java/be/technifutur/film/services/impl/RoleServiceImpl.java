@@ -2,9 +2,10 @@ package be.technifutur.film.services.impl;
 
 import be.technifutur.film.models.dtos.RoleDTO;
 import be.technifutur.film.models.forms.RoleForm;
-import be.technifutur.film.models.entities.Role;
 import be.technifutur.film.models.repositories.RoleRepository;
 import be.technifutur.film.services.RoleService;
+import be.technifutur.sharedclass.film.models.entities.Role;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;

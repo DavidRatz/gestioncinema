@@ -1,9 +1,10 @@
 package be.technifutur.film.services;
 
-import be.technifutur.film.models.dtos.MovieDTO;
 import be.technifutur.film.models.forms.*;
+import be.technifutur.sharedclass.film.models.dtos.MovieDTO;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface MovieService {
     List<MovieDTO> getAll();
@@ -14,4 +15,5 @@ public interface MovieService {
     MovieDTO patchPersons(Long id, MoviePersonForm form);
     MovieDTO patchGenres(Long id, MovieGenreForm form);
     MovieDTO patchFormats(Long id, MovieFormatForm form);
+    MovieDTO getByRef(UUID ref);
 }

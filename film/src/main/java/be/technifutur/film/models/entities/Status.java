@@ -1,5 +1,5 @@
-package be.technifutur.film.models.entities;
+// package be.technifutur.film.models.entities;
 
-public enum Status {
-    CURRENT,SOON,FINISH
-}
+// public enum Status {
+//     CURRENT,SOON,FINISH
+// }

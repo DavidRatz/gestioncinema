@@ -3,7 +3,7 @@ package be.technifutur.film.models.dtos;
 import java.io.Serializable;
 import java.util.List;
 
-import be.technifutur.film.models.entities.Person;
+import be.technifutur.sharedclass.film.models.entities.Person;
 import lombok.*;
 
 @Getter

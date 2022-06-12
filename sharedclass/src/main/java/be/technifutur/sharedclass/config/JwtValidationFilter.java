@@ -13,7 +13,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import be.technifutur.sharedclass.dtos.UserDTO;
+import be.technifutur.sharedclass.user.models.dtos.UserDTO;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

@@ -3,7 +3,7 @@ package be.technifutur.film.models.forms;
 import java.time.*;
 import java.util.List;
 
-import be.technifutur.film.models.entities.*;
+import be.technifutur.sharedclass.film.models.entities.*;
 import lombok.Data;
 
 @Data

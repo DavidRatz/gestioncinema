@@ -2,7 +2,7 @@ package be.technifutur.film.models.dtos;
 
 import java.io.Serializable;
 
-import be.technifutur.film.models.entities.Role;
+import be.technifutur.sharedclass.film.models.entities.Role;
 import lombok.*;
 
 @Getter
