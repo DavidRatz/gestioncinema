@@ -17,8 +17,7 @@ public class TheaterController {
     @Autowired
     private TheaterService service;
 
-    @GetMapping()
-    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping
     public List<TheaterDTO> getAllTheaters() {
         return service.getAll();
     }
@@ -34,21 +33,25 @@ public class TheaterController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public TheaterDTO postTheater(@RequestBody TheaterForm theaterForm) {
         return service.insert(theaterForm);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public TheaterDTO putTheater(@PathVariable Long id, @RequestBody TheaterForm theaterForm) {
         return service.update(id, theaterForm);
     }
 
     @PatchMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public TheaterDTO patchTheaterActive(@PathVariable Long id, @RequestBody boolean active) {
         return service.patchActive(id, active);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public TheaterDTO deleteTheater(@PathVariable Long id) {
         return service.delete(id);
     }

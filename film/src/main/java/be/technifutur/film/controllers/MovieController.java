@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import be.technifutur.film.models.forms.*;
@@ -33,11 +34,13 @@ public class MovieController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public MovieDTO postMovie(@RequestBody MovieForm movieForm) {
         return service.insert(movieForm);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public MovieDTO putMovie(@PathVariable Long id, @RequestBody MovieForm movieForm) {
         return service.update(id, movieForm);
     }
@@ -56,6 +59,7 @@ public class MovieController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public MovieDTO deleteMovie(@PathVariable Long id) {
         return service.delete(id);
     }

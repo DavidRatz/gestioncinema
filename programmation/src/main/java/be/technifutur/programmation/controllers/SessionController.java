@@ -2,6 +2,7 @@ package be.technifutur.programmation.controllers;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -33,16 +34,19 @@ public class SessionController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public SessionDTO postSession(@RequestBody SessionForm sessionForm) {
         return service.insert(sessionForm);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public SessionDTO putSession(@PathVariable Long id, @RequestBody SessionForm sessionForm) {
         return service.update(id, sessionForm);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public SessionDTO deleteSession(@PathVariable Long id) {
         return service.delete(id);
     }

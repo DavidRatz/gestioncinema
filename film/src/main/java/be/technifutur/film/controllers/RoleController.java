@@ -2,6 +2,7 @@ package be.technifutur.film.controllers;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import be.technifutur.film.models.dtos.RoleDTO;
 import be.technifutur.film.models.forms.RoleForm;
@@ -25,16 +26,19 @@ public class RoleController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public RoleDTO postRole(@RequestBody RoleForm roleForm) {
         return service.insert(roleForm);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public RoleDTO putRole(@PathVariable Long id, @RequestBody RoleForm roleForm) {
         return service.update(id, roleForm);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public RoleDTO deleteRole(@PathVariable Long id) {
         return service.delete(id);
     }

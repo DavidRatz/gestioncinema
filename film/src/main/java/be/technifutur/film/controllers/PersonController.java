@@ -2,6 +2,7 @@ package be.technifutur.film.controllers;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import be.technifutur.film.models.dtos.PersonDTO;
 import be.technifutur.film.models.forms.*;
@@ -25,11 +26,13 @@ public class PersonController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public PersonDTO postPerson(@RequestBody PersonForm personForm) {
         return service.insert(personForm);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public PersonDTO putPerson(@PathVariable Long id, @RequestBody PersonForm personForm) {
         return service.update(id, personForm);
     }
@@ -40,6 +43,7 @@ public class PersonController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public PersonDTO deletePerson(@PathVariable Long id) {
         return service.delete(id);
     }
