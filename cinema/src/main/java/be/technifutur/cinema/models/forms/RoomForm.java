@@ -2,8 +2,8 @@ package be.technifutur.cinema.models.forms;
 
 import java.util.List;
 
-import be.technifutur.cinema.models.entities.Feature;
-import be.technifutur.cinema.models.entities.Theater;
+import be.technifutur.sharedclass.cinema.models.entities.Feature;
+import be.technifutur.sharedclass.cinema.models.entities.Theater;
 import lombok.Data;
 
 @Data

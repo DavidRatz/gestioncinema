@@ -1,15 +1,16 @@
 package be.technifutur.cinema.services.impl;
 
-import be.technifutur.cinema.models.dtos.RoomDTO;
+import be.technifutur.sharedclass.cinema.models.dtos.RoomDTO;
 import be.technifutur.cinema.models.forms.*;
-import be.technifutur.cinema.models.entities.Feature;
-import be.technifutur.cinema.models.entities.Room;
+import be.technifutur.sharedclass.cinema.models.entities.Feature;
+import be.technifutur.sharedclass.cinema.models.entities.Room;
 import be.technifutur.cinema.models.repositories.*;
 import be.technifutur.cinema.services.RoomService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class RoomServiceImpl implements RoomService {
@@ -32,6 +33,16 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public RoomDTO getOne(Long id) {
         return repository.findById(id).map(RoomDTO::of).orElseThrow();
+    }
+
+    @Override
+    public List<RoomDTO> getRoomsbByIdCinema(Long idCinema) {
+        return repository.findByTheaterId(idCinema).stream().map(RoomDTO::of).toList();
+    }
+
+    @Override
+    public RoomDTO getByRef(UUID ref) {
+        return repository.findByRef(ref).map(RoomDTO::of).orElseThrow();
     }
 
     @Override

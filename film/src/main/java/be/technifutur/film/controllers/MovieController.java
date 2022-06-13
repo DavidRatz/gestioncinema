@@ -27,8 +27,8 @@ public class MovieController {
         return service.getOne(id);
     }
 
-    @GetMapping("/{ref}")
-    public MovieDTO getMovieByRef(@PathVariable UUID ref) {
+    @GetMapping(params = "ref")
+    public MovieDTO getMovieByRef(@RequestParam UUID ref) {
         return service.getByRef(ref);
     }
 

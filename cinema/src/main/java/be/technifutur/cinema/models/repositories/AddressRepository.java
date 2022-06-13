@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import be.technifutur.cinema.models.entities.*;
+import be.technifutur.sharedclass.cinema.models.entities.*;
 
 public interface AddressRepository extends JpaRepository<Address,Long> {
     

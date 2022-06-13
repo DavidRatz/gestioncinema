@@ -10,6 +10,5 @@ public class SessionForm {
     private UUID refRoom;
     private UUID refMovie;
     private UUID refTheater;
-    private LocalDate date;
-    private LocalTime hour;
+    private LocalDateTime date;
 }

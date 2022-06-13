@@ -1,9 +1,11 @@
 package be.technifutur.cinema.controllers;
 
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import be.technifutur.cinema.models.dtos.RoomDTO;
+import be.technifutur.sharedclass.cinema.models.dtos.RoomDTO;
 import be.technifutur.cinema.models.forms.*;
 import be.technifutur.cinema.services.RoomService;
 
@@ -22,6 +24,16 @@ public class RoomController {
     @GetMapping("/{id}")
     public RoomDTO getRoom(@PathVariable Long id) {
         return service.getOne(id);
+    }
+
+    @GetMapping("/theater/{idCinema}")
+    public List<RoomDTO> getAllRoomsByIdTheater(@PathVariable Long idCinema) {
+        return service.getRoomsbByIdCinema(idCinema);
+    }
+
+    @GetMapping(params = "ref")
+    public RoomDTO getRoomByRef(@RequestParam UUID ref) {
+        return service.getByRef(ref);
     }
 
     @PostMapping

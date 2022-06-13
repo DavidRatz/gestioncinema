@@ -11,6 +11,6 @@ import be.technifutur.sharedclass.film.models.dtos.MovieDTO;
         name = "film-service"
 )
 public interface FilmFeign {
-    @GetMapping("/{ref}")
-    public MovieDTO getMovieByRef(@PathVariable UUID ref);
+    @GetMapping("/movie")
+    public MovieDTO getMovieByRef(@RequestParam UUID ref);
 }

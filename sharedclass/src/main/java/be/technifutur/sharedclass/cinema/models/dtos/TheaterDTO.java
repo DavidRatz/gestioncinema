@@ -1,4 +1,4 @@
-package be.technifutur.cinema.models.dtos;
+package be.technifutur.sharedclass.cinema.models.dtos;
 
 import java.io.Serializable;
 import java.time.LocalDate;

@@ -1,5 +1,6 @@
-package be.technifutur.user.models.entities;
+package be.technifutur.sharedclass.cinema.models.entities;
 
+import java.util.List;
 import java.util.UUID;
 import javax.persistence.*;
 
@@ -12,7 +13,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cart {
+public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,12 +22,15 @@ public class Cart {
     @Type(type = "uuid-char")
     private UUID ref = UUID.randomUUID();
     @Column(nullable = false)
-    private int quantity;
+    private int number;
     @Column(nullable = false)
-    private float price;
-    @Column(nullable = false, unique = true, columnDefinition = "varchar(255)")
-    @Type(type = "uuid-char")
-    private UUID refSeance;
+    private int numberSeats;
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean active = true;
     @ManyToOne
-    private User user;    
+    private Theater theater;
+    @ManyToMany
+    @JoinTable(name="Room_Feature")
+    private List<Feature> features;
 }

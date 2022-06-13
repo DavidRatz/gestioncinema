@@ -2,7 +2,7 @@ package be.technifutur.cinema.services.impl;
 
 import be.technifutur.cinema.models.dtos.FeatureDTO;
 import be.technifutur.cinema.models.forms.FeatureForm;
-import be.technifutur.cinema.models.entities.Feature;
+import be.technifutur.sharedclass.cinema.models.entities.Feature;
 import be.technifutur.cinema.models.repositories.FeatureRepository;
 import be.technifutur.cinema.services.FeatureService;
 import org.springframework.stereotype.Service;

@@ -1,14 +1,15 @@
 package be.technifutur.cinema.services.impl;
 
-import be.technifutur.cinema.models.dtos.TheaterDTO;
+import be.technifutur.sharedclass.cinema.models.dtos.TheaterDTO;
 import be.technifutur.cinema.models.forms.TheaterForm;
-import be.technifutur.cinema.models.entities.Address;
-import be.technifutur.cinema.models.entities.Theater;
+import be.technifutur.sharedclass.cinema.models.entities.Address;
+import be.technifutur.sharedclass.cinema.models.entities.Theater;
 import be.technifutur.cinema.models.repositories.*;
 import be.technifutur.cinema.services.TheaterService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TheaterServiceImpl implements TheaterService {
@@ -29,6 +30,11 @@ public class TheaterServiceImpl implements TheaterService {
     @Override
     public TheaterDTO getOne(Long id) {
         return repository.findById(id).map(TheaterDTO::of).orElseThrow();
+    }
+
+    @Override
+    public TheaterDTO getByRef(UUID ref) {
+        return repository.findByRef(ref).map(TheaterDTO::of).orElseThrow();
     }
 
     @Override

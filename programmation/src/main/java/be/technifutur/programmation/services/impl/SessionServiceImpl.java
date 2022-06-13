@@ -1,11 +1,19 @@
 package be.technifutur.programmation.services.impl;
 
+import be.technifutur.programmation.models.dtos.SessionAllDataDTO;
 import be.technifutur.programmation.models.dtos.SessionDTO;
-import be.technifutur.programmation.models.forms.SessionForm;
 import be.technifutur.programmation.models.entities.Session;
+import be.technifutur.programmation.models.forms.SessionForm;
 import be.technifutur.programmation.models.repositories.SessionRepository;
 import be.technifutur.programmation.services.SessionService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+
+import be.technifutur.sharedclass.film.models.dtos.MovieDTO;
+import be.technifutur.sharedclass.cinema.models.dtos.*;
+import be.technifutur.programmation.configs.feign.*;
 
 import java.util.List;
 
@@ -13,6 +21,11 @@ import java.util.List;
 public class SessionServiceImpl implements SessionService {
 
     private final SessionRepository repository;
+
+    @Autowired
+    private FilmFeign filmFeign;
+    @Autowired
+    private TheaterFeign theaterFeign;
 
     public SessionServiceImpl(SessionRepository repository) {
         this.repository = repository;
@@ -29,13 +42,23 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
+    public SessionAllDataDTO getSessionAllData(SessionForm form) {
+        MovieDTO movieDTO = filmFeign.getMovieByRef(form.getRefMovie());
+        RoomDTO roomDTO = theaterFeign.getRoomByRef(form.getRefRoom());
+        TheaterDTO theaterDTO = theaterFeign.getTheaterByRef(form.getRefTheater());
+
+        Session session = repository.findByRefMovieAndRefTheaterAndDate(form.getRefMovie(),form.getRefTheater(),form.getDate()).orElseThrow();
+
+        return SessionAllDataDTO.of(session, movieDTO, roomDTO, theaterDTO);
+    }
+
+    @Override
     public SessionDTO insert(SessionForm form) {
         Session toInsert = Session.builder()
                             .refMovie(form.getRefMovie())
                             .refRoom(form.getRefRoom())
                             .refTheater(form.getRefTheater())
                             .date(form.getDate())
-                            .hour(form.getHour())
                             .build();
         return SessionDTO.of(repository.save(toInsert));
     }
@@ -47,7 +70,6 @@ public class SessionServiceImpl implements SessionService {
         toUpdate.setRefRoom(form.getRefRoom());
         toUpdate.setRefTheater(form.getRefTheater());
         toUpdate.setDate(form.getDate());
-        toUpdate.setHour(form.getHour());
         toUpdate = repository.save(toUpdate);
         return SessionDTO.of(toUpdate);
     }

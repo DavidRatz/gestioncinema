@@ -2,7 +2,7 @@ package be.technifutur.cinema.models.dtos;
 
 import java.io.Serializable;
 
-import be.technifutur.cinema.models.entities.Address;
+import be.technifutur.sharedclass.cinema.models.entities.Address;
 import lombok.*;
 
 @Getter

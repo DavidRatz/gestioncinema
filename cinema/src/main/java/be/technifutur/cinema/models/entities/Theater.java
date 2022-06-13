@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 import javax.persistence.*;
+
+import org.hibernate.annotations.Type;
+
 import lombok.*;
 
 @Entity
@@ -15,8 +18,9 @@ public class Theater {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, columnDefinition = "varchar(255)")
     @Builder.Default
+    @Type(type = "uuid-char")
     private UUID ref = UUID.randomUUID();
     @Column(nullable = false)
     private String name;

@@ -1,4 +1,4 @@
-package be.technifutur.cinema.models.dtos;
+package be.technifutur.sharedclass.cinema.models.dtos;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -73,6 +73,28 @@ public class RoomDTO {
                 theater.getPhoneNumber(),
                 theater.isActive(),
                 AddressDTO.of(theater.getAddress())
+            );
+        }
+    }
+
+    @Data
+    public static class AddressDTO{
+        private final String street;
+        private final String number;
+        private final int postCode;
+        private final String city;
+        private final String country;
+    
+        public static AddressDTO of(Address address) {
+            if( address == null )
+                return null;
+    
+            return new AddressDTO(
+                address.getStreet(),
+                address.getNumber(),
+                address.getPostCode(),
+                address.getCity(),
+                address.getCountry()
             );
         }
     }

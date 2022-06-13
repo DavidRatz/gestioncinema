@@ -4,11 +4,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import be.technifutur.programmation.configs.feign.FilmFeign;
-import be.technifutur.programmation.models.dtos.SessionDTO;
+
+import be.technifutur.programmation.models.dtos.*;
 import be.technifutur.programmation.models.forms.SessionForm;
 import be.technifutur.programmation.services.SessionService;
-import be.technifutur.sharedclass.film.models.dtos.MovieDTO;
 
 @RestController
 @RequestMapping("/session")
@@ -16,8 +15,7 @@ public class SessionController {
 
     @Autowired
     private SessionService service;
-    @Autowired
-    private FilmFeign film;
+    
 
     @GetMapping()
     public List<SessionDTO> getAllSessions() {
@@ -30,9 +28,8 @@ public class SessionController {
     }
 
     @GetMapping("/search")
-    public SessionDTO getSearchSession(@RequestBody SessionForm sessionForm) {
-        MovieDTO movie = film.getMovieByRef(sessionForm.getRefMovie());
-        return null;
+    public SessionAllDataDTO getSearchSession(@RequestBody SessionForm sessionForm) {
+        return service.getSessionAllData(sessionForm);
     }
 
     @PostMapping

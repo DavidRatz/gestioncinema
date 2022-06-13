@@ -1,5 +1,7 @@
-package be.technifutur.user.models.entities;
+package be.technifutur.sharedclass.cinema.models.entities;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 import javax.persistence.*;
 
@@ -12,7 +14,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cart {
+public class Theater {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,12 +23,16 @@ public class Cart {
     @Type(type = "uuid-char")
     private UUID ref = UUID.randomUUID();
     @Column(nullable = false)
-    private int quantity;
+    private String name;
     @Column(nullable = false)
-    private float price;
-    @Column(nullable = false, unique = true, columnDefinition = "varchar(255)")
-    @Type(type = "uuid-char")
-    private UUID refSeance;
-    @ManyToOne
-    private User user;    
+    private LocalDate dateCreation;
+    @Column(nullable = false)
+    private String phoneNumber;
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean active = true;
+    @OneToOne
+    private Address address;
+    @OneToMany(mappedBy = "theater")
+    private List<Room> rooms;
 }
