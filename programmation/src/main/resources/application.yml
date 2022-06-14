@@ -5,3 +5,10 @@ spring:
     active: @activatedProperties@
   config:
     import: configserver:@configurationserver@
+  cloud:
+    stream:
+      bindings:
+        envoisession-out-0:
+          destination: messages.user
+          binder: rabbit
+          group: user

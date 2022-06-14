@@ -28,7 +28,7 @@ public class RoomController {
     }
 
     @GetMapping("/theater/{idCinema}")
-    public List<RoomDTO> getAllRoomsByIdTheater(@PathVariable Long idCinema) {
+    public List<RoomDTO> getAllRoomsByIdTheater(@PathVariable UUID idCinema) {
         return service.getRoomsbByIdCinema(idCinema);
     }
 

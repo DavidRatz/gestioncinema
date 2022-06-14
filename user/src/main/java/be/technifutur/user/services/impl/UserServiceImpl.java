@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import be.technifutur.sharedclass.programmation.models.dtos.Session2CartDTO;
+import be.technifutur.sharedclass.user.models.dtos.Cart2ReservDTO;
 import be.technifutur.user.models.dtos.UserDTO;
 import be.technifutur.user.models.entities.User;
 import be.technifutur.user.models.forms.UserForm;

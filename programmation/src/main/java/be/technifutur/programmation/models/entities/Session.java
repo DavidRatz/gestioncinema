@@ -21,13 +21,13 @@ public class Session {
     @Builder.Default
     @Type(type = "uuid-char")
     private UUID ref = UUID.randomUUID();
-    @Column(nullable = false, unique = true, columnDefinition = "varchar(255)")
+    @Column(nullable = false, columnDefinition = "varchar(255)")
     @Type(type = "uuid-char")
     private UUID refRoom;
-    @Column(nullable = false, unique = true, columnDefinition = "varchar(255)")
+    @Column(nullable = false, columnDefinition = "varchar(255)")
     @Type(type = "uuid-char")
     private UUID refMovie;
-    @Column(nullable = false, unique = true, columnDefinition = "varchar(255)")
+    @Column(nullable = false, columnDefinition = "varchar(255)")
     @Type(type = "uuid-char")
     private UUID refTheater;
     @Column(nullable = false)

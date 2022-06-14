@@ -13,5 +13,5 @@ public interface RoomService {
     RoomDTO update(Long id, RoomUpdateForm form);
     RoomDTO patchActive(Long id, boolean active);
     RoomDTO getByRef(UUID ref);
-    List<RoomDTO> getRoomsbByIdCinema(Long idCinema);
+    List<RoomDTO> getRoomsbByIdCinema(UUID idCinema);
 }

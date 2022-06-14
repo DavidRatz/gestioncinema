@@ -48,6 +48,7 @@ public class LoginServiceImpl implements LoginService {
             .sign(Algorithm.HMAC512(properties.getSecret()));    
         return JwtDTO.builder()
             .username(form.getUsername())
+            .role(authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).findFirst().orElseThrow())
             .jwt(jwt)
             .build();    
     }

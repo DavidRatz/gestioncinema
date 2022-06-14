@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 
 import be.technifutur.programmation.models.dtos.*;
-import be.technifutur.programmation.models.forms.SessionForm;
+import be.technifutur.programmation.models.forms.*;
 import be.technifutur.programmation.services.SessionService;
+import be.technifutur.sharedclass.programmation.models.dtos.Session2CartDTO;
 
 @RestController
 @RequestMapping("/session")
@@ -28,9 +29,14 @@ public class SessionController {
         return service.getOne(id);
     }
 
-    @GetMapping("/search")
+    @PostMapping("/search")
     public SessionAllDataDTO getSearchSession(@RequestBody SessionForm sessionForm) {
         return service.getSessionAllData(sessionForm);
+    }
+
+    @PostMapping("/addcart")
+    public Session2CartDTO getSearchSession(@RequestBody Session2CartForm session2CartForm) {
+        return service.addSession2Cart(session2CartForm);
     }
 
     @PostMapping

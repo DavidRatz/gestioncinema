@@ -5,3 +5,12 @@ spring:
     active: @activatedProperties@
   config:
     import: configserver:@configurationserver@
+  cloud:
+    stream:
+      function:
+        definition: recevoircart
+      bindings:
+        recevoircart-in-0:
+          destination: messages.reservation
+          binder: rabbit
+          group: reservation

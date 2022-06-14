@@ -36,8 +36,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<RoomDTO> getRoomsbByIdCinema(Long idCinema) {
-        return repository.findByTheaterId(idCinema).stream().map(RoomDTO::of).toList();
+    public List<RoomDTO> getRoomsbByIdCinema(UUID refCinema) {
+        return repository.findByTheaterId(theaterRepo.findByRef(refCinema).get().getId()).stream().map(RoomDTO::of).toList();
     }
 
     @Override
