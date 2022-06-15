@@ -1,10 +1,10 @@
-package be.technifutur.reservation.models.dtos;
+package be.technifutur.sharedclass.reservation.models.dtos;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import be.technifutur.reservation.models.entities.Ticket;
+import be.technifutur.sharedclass.reservation.models.entities.Ticket;
 
 import lombok.*;
 

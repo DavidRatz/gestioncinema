@@ -1,4 +1,4 @@
-package be.technifutur.reservation.models.entities;
+package be.technifutur.sharedclass.reservation.models.entities;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -23,6 +23,7 @@ public class Ticket {
     private UUID ref = UUID.randomUUID();
     @Column(nullable = false)
     private LocalDateTime dateShipping;
-    @Column(nullable = false, unique = true)@Type(type = "uuid-char")
+    @Column(nullable = false, unique = true)
+    @Type(type = "uuid-char")
     private UUID refCart;
 }

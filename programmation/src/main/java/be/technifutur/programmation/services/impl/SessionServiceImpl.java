@@ -1,11 +1,11 @@
 package be.technifutur.programmation.services.impl;
 
 import be.technifutur.sharedclass.programmation.models.dtos.Session2CartDTO;
-import be.technifutur.programmation.models.dtos.SessionAllDataDTO;
+import be.technifutur.sharedclass.programmation.models.dtos.SessionAllDataDTO;
+import be.technifutur.sharedclass.programmation.models.entities.Session;
+import be.technifutur.sharedclass.programmation.models.forms.SessionForm;
 import be.technifutur.programmation.models.dtos.SessionDTO;
-import be.technifutur.programmation.models.entities.Session;
 import be.technifutur.programmation.models.forms.Session2CartForm;
-import be.technifutur.programmation.models.forms.SessionForm;
 import be.technifutur.programmation.models.repositories.SessionRepository;
 import be.technifutur.programmation.services.SessionService;
 
@@ -20,6 +20,7 @@ import be.technifutur.programmation.configs.feign.*;
 import be.technifutur.programmation.configs.rabbit.MessageSender;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class SessionServiceImpl implements SessionService {
@@ -57,6 +58,18 @@ public class SessionServiceImpl implements SessionService {
         Session session = repository.findByRefMovieAndRefTheaterAndDate(form.getRefMovie(),form.getRefTheater(),form.getDate()).orElseThrow();
 
         return SessionAllDataDTO.of(session, movieDTO, roomDTO, theaterDTO);
+    }
+
+    @Override
+    public SessionAllDataDTO getSessionAllData4User(UUID refSession) {
+
+        Session session = repository.findByRef(refSession).orElseThrow();
+
+        MovieDTO movieDTO = filmFeign.getMovieByRef(session.getRefMovie());
+        RoomDTO roomDTO = theaterFeign.getRoomByRef(session.getRefRoom());
+        TheaterDTO theaterDTO = theaterFeign.getTheaterByRef(session.getRefTheater());
+
+         return SessionAllDataDTO.of(session, movieDTO, roomDTO, theaterDTO);
     }
 
     

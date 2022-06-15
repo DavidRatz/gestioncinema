@@ -1,11 +1,13 @@
 package be.technifutur.reservation.controllers;
 
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import be.technifutur.reservation.models.dtos.TicketDTO;
-import be.technifutur.reservation.models.forms.TicketForm;
+import be.technifutur.sharedclass.reservation.models.dtos.TicketDTO;
+import be.technifutur.sharedclass.reservation.models.forms.TicketForm;
 import be.technifutur.reservation.services.TicketService;
 
 @RestController
@@ -23,6 +25,11 @@ public class TicketController {
     @GetMapping("/{id}")
     public TicketDTO getTicket(@PathVariable Long id) {
         return service.getOne(id);
+    }
+
+    @GetMapping(params = "ref")
+    public List<TicketDTO> getTicket(@RequestParam UUID ref) {
+        return service.getAllTicketByRefCart(ref);
     }
 
     @PostMapping

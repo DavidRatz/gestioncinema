@@ -6,10 +6,12 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import be.technifutur.programmation.models.entities.Session;
+import be.technifutur.sharedclass.programmation.models.entities.Session;
 
 public interface SessionRepository extends JpaRepository<Session,Long> {
 
     Optional<Session> findByRefMovieAndRefTheaterAndDate(UUID refMovie, UUID refTheater, LocalDateTime date);
+
+    Optional<Session> findByRef(UUID refSession);
     
 }

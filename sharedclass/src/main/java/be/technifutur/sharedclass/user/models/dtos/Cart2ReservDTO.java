@@ -8,4 +8,5 @@ import lombok.*;
 @Builder
 public class Cart2ReservDTO {
     private final UUID refCart;
+    private final int quantity;
 }

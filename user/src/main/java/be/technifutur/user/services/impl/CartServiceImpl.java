@@ -1,6 +1,7 @@
 package be.technifutur.user.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import be.technifutur.sharedclass.programmation.models.dtos.Session2CartDTO;
 import be.technifutur.sharedclass.user.models.dtos.Cart2ReservDTO;
@@ -10,6 +11,7 @@ import be.technifutur.user.models.repositories.CartRepository;
 import be.technifutur.user.models.repositories.UserRepository;
 import be.technifutur.user.services.CartService;
 
+@Service
 public class CartServiceImpl implements CartService {
 
     @Autowired
@@ -24,10 +26,11 @@ public class CartServiceImpl implements CartService {
                         .user(user)
                         .quantity(session2CartDTO.getQuantity())
                         .price(9.50f)
+                        .refSeance(session2CartDTO.getRefSession())
                         .build();
 
         Cart cartSaved = cRepo.save(cart);
-        return Cart2ReservDTO.builder().refCart(cartSaved.getRef()).build();
+        return Cart2ReservDTO.builder().refCart(cartSaved.getRef()).quantity(cart.getQuantity()).build();
     }
     
 }

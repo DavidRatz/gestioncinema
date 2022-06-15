@@ -1,4 +1,4 @@
-package be.technifutur.programmation.models.forms;
+package be.technifutur.sharedclass.programmation.models.forms;
 
 import java.time.*;
 import java.util.UUID;

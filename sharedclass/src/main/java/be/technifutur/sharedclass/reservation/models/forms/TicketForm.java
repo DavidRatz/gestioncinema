@@ -1,4 +1,4 @@
-package be.technifutur.reservation.models.forms;
+package be.technifutur.sharedclass.reservation.models.forms;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

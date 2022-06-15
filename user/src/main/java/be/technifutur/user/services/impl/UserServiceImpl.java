@@ -10,12 +10,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import be.technifutur.sharedclass.programmation.models.dtos.Session2CartDTO;
+import be.technifutur.sharedclass.programmation.models.dtos.SessionAllDataDTO;
+import be.technifutur.sharedclass.reservation.models.dtos.TicketDTO;
 import be.technifutur.sharedclass.user.models.dtos.Cart2ReservDTO;
+import be.technifutur.user.configs.feign.*;
+import be.technifutur.user.models.dtos.CartDTO;
+import be.technifutur.user.models.dtos.ReservationDataDTO;
 import be.technifutur.user.models.dtos.UserDTO;
+import be.technifutur.user.models.entities.Cart;
 import be.technifutur.user.models.entities.User;
 import be.technifutur.user.models.forms.UserForm;
 import be.technifutur.user.models.forms.LoginForm;
-import be.technifutur.user.models.repositories.UserRepository;
+import be.technifutur.user.models.repositories.*;
 import be.technifutur.user.services.UserService;
 
 
@@ -25,7 +31,13 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Autowired
     private UserRepository uRepo;
     @Autowired
+    private CartRepository cRepo;
+    @Autowired
     private PasswordEncoder encoder;
+    @Autowired
+    private SessionFeign session;
+    @Autowired
+    private TicketFeign ticket;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -45,6 +57,23 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public UserDTO getUserByUsername(String username) {
         return uRepo.findByUsername(username).map(UserDTO::of).orElseThrow();
+    }
+    
+
+    @Override
+    public ReservationDataDTO getReservationByIdUser(Long id) {
+        CartDTO cart = cRepo.findByUser(uRepo.findById(id).orElseThrow()).map(CartDTO::of).orElseThrow();
+        SessionAllDataDTO sessionDTO = session.getSearchSessionUser(cart.getRefSeance());
+        List<TicketDTO> ticketDTO = ticket.getTickets(cart.getRef());
+
+
+        ReservationDataDTO reservationData = ReservationDataDTO.builder()
+                                                .sessionDTO(sessionDTO)
+                                                .quantity(cart.getQuantity())
+                                                .price(cart.getPrice())
+                                                .ticketDTO(ticketDTO)
+                                                .build();
+        return reservationData;
     }
 
     @Override

@@ -2,6 +2,7 @@ package be.technifutur.user.services;
 
 import be.technifutur.sharedclass.programmation.models.dtos.Session2CartDTO;
 import be.technifutur.sharedclass.user.models.dtos.Cart2ReservDTO;
+import be.technifutur.user.models.dtos.ReservationDataDTO;
 import be.technifutur.user.models.dtos.UserDTO;
 import be.technifutur.user.models.forms.*;
 import java.util.List;
@@ -14,4 +15,5 @@ public interface UserService {
     UserDTO delete(Long id);
     UserDTO update(Long id, UserForm form);
     UserDTO getUserByUsername(String username);
+    ReservationDataDTO getReservationByIdUser(Long id);
 }

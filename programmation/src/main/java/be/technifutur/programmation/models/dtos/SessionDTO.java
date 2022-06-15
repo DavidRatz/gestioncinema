@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.*;
 import java.util.UUID;
 
-import be.technifutur.programmation.models.entities.Session;
+import be.technifutur.sharedclass.programmation.models.entities.Session;
 import lombok.*;
 
 @Getter

@@ -8,7 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import be.technifutur.sharedclass.programmation.models.dtos.Session2CartDTO;
-import be.technifutur.user.services.UserService;
+import be.technifutur.sharedclass.user.models.dtos.Cart2ReservDTO;
+import be.technifutur.user.services.CartService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -17,17 +18,15 @@ public class StreamConfig {
     @Autowired
     private StreamBridge streamBridge;
     @Autowired
-    private UserService service;
+    private CartService service;
 
     @Bean
-    public Function<Session2CartDTO, void> recevoirsessionenvoicart(){
-        return (session) ->{
-            log.info("Session RECEIVED - " + session);
+    public Function<Session2CartDTO, Cart2ReservDTO> recevoirsessionenvoicart(){
+        return (session2CartDTO) ->{
+            log.info("Session RECEIVED - " + session2CartDTO);
 
             
-
-            // Facture f = service.createFacture((int)r.getDate_arrive().until(r.getDate_depart(),ChronoUnit.DAYS), r.getRef());
-            // return f;
+            return service.add2CartFromSessionAndSend2Reserv(session2CartDTO);
         };
     }
 }

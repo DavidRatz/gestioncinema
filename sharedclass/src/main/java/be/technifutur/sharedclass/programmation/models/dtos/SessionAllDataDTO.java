@@ -1,10 +1,10 @@
-package be.technifutur.programmation.models.dtos;
+package be.technifutur.sharedclass.programmation.models.dtos;
 
 import java.io.Serializable;
 import java.time.*;
 import java.util.UUID;
 
-import be.technifutur.programmation.models.entities.Session;
+import be.technifutur.sharedclass.programmation.models.entities.Session;
 import be.technifutur.sharedclass.film.models.dtos.MovieDTO;
 import be.technifutur.sharedclass.cinema.models.dtos.*;
 //import be.technifutur.sharedclass.room.models.dtos.RoomDTO;

@@ -1,4 +1,4 @@
-package be.technifutur.programmation.models.entities;
+package be.technifutur.sharedclass.programmation.models.entities;
 
 import java.time.*;
 import java.util.UUID;

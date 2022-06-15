@@ -3,6 +3,8 @@ package be.technifutur.user.controllers;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import be.technifutur.user.models.dtos.ReservationDataDTO;
 import be.technifutur.user.models.dtos.UserDTO;
 import be.technifutur.user.models.forms.UserForm;
 import be.technifutur.user.services.UserService;
@@ -27,6 +29,11 @@ public class UserController {
     @GetMapping(params = "username")
     public UserDTO getUserByUsername(@RequestParam String username) {
         return service.getUserByUsername(username);
+    }
+
+    @GetMapping(params = "id")
+    public ReservationDataDTO getReservation(@RequestParam Long id) {
+        return service.getReservationByIdUser(id);
     }
 
     @PostMapping

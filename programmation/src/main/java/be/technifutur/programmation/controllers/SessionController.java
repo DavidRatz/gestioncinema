@@ -1,6 +1,8 @@
 package be.technifutur.programmation.controllers;
 
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +12,8 @@ import be.technifutur.programmation.models.dtos.*;
 import be.technifutur.programmation.models.forms.*;
 import be.technifutur.programmation.services.SessionService;
 import be.technifutur.sharedclass.programmation.models.dtos.Session2CartDTO;
+import be.technifutur.sharedclass.programmation.models.dtos.SessionAllDataDTO;
+import be.technifutur.sharedclass.programmation.models.forms.SessionForm;
 
 @RestController
 @RequestMapping("/session")
@@ -29,6 +33,10 @@ public class SessionController {
         return service.getOne(id);
     }
 
+    @GetMapping(params = "ref")
+    public SessionAllDataDTO getSearchSessionUser(@RequestParam UUID ref) {
+        return service.getSessionAllData4User(ref);
+    }
     @PostMapping("/search")
     public SessionAllDataDTO getSearchSession(@RequestBody SessionForm sessionForm) {
         return service.getSessionAllData(sessionForm);
