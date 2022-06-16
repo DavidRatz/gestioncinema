@@ -26,14 +26,14 @@ public class UserController {
         return service.getOne(id);
     }
 
-    @GetMapping(params = "username")
-    public UserDTO getUserByUsername(@RequestParam String username) {
-        return service.getUserByUsername(username);
+    @GetMapping("/name/{name}")
+    public UserDTO getUserByUsername(@PathVariable String name) {
+        return service.getUserByUsername(name);
     }
 
-    @GetMapping(params = "id")
-    public ReservationDataDTO getReservation(@RequestParam Long id) {
-        return service.getReservationByIdUser(id);
+    @GetMapping("/reservation/{username}")
+    public ReservationDataDTO getReservation(@PathVariable String username) {
+        return service.getReservationByUsername(username);
     }
 
     @PostMapping

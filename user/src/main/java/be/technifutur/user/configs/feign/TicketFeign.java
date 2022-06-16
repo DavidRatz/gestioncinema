@@ -15,5 +15,5 @@ import be.technifutur.sharedclass.reservation.models.dtos.TicketDTO;
 )
 public interface TicketFeign {
     @GetMapping("/ticket")
-    public List<TicketDTO> getTickets(@RequestParam UUID ref);
+    public TicketDTO getTickets(@RequestParam UUID ref);
 }

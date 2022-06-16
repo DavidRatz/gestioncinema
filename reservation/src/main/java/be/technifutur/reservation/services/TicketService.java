@@ -14,5 +14,5 @@ public interface TicketService {
     TicketDTO delete(Long id);
     TicketDTO update(Long id, TicketForm form);
     void setTicket(Cart2ReservDTO cart);
-    List<TicketDTO> getAllTicketByRefCart(UUID ref);
+    TicketDTO getAllTicketByRefCart(UUID ref);
 }

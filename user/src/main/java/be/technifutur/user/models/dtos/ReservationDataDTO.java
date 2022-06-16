@@ -10,8 +10,7 @@ import lombok.*;
 @Builder
 public class ReservationDataDTO {
     private final SessionAllDataDTO sessionDTO;
-    private final int quantity;
-    private final float price;
-    private final List<TicketDTO> ticketDTO;
+    private final CartDTO cartDTO;
+    private final TicketDTO ticketDTO;
 
 }

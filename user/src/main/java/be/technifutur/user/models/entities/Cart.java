@@ -24,7 +24,7 @@ public class Cart {
     private int quantity;
     @Column(nullable = false)
     private float price;
-    @Column(nullable = false, unique = true, columnDefinition = "varchar(255)")
+    @Column(nullable = false, columnDefinition = "varchar(255)")
     @Type(type = "uuid-char")
     private UUID refSeance;
     @ManyToOne

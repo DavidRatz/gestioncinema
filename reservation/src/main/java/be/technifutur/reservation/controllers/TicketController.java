@@ -28,7 +28,7 @@ public class TicketController {
     }
 
     @GetMapping(params = "ref")
-    public List<TicketDTO> getTicket(@RequestParam UUID ref) {
+    public TicketDTO getTicket(@RequestParam UUID ref) {
         return service.getAllTicketByRefCart(ref);
     }
 

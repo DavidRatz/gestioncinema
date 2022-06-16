@@ -12,6 +12,7 @@ import be.technifutur.sharedclass.film.models.entities.Movie;
 
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.*;
 
 @Service
@@ -46,6 +47,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public MovieDTO insert(MovieForm form) {
+        form.setDuration(LocalTime.of(2, 0));
         Movie toInsert = Movie.builder()
                             .title(form.getTitle())
                             .description(form.getDescription())
@@ -54,13 +56,14 @@ public class MovieServiceImpl implements MovieService {
                             .status(form.getStatus())
                             .build();
         toInsert.setFormats(FormConverterList.convertIdList2EntityList(formatRepo,form.getFormats()));
-        toInsert.setGenres(FormConverterList.convertIdList2EntityList(genreRepo,form.getGenres()));
+        toInsert.setGenres(form.getGenres());
         toInsert.setPersons(FormConverterList.convertIdList2EntityList(personRepo,form.getPersons()));
         return MovieDTO.of(repository.save(toInsert));
     }
 
     @Override
     public MovieDTO update(Long id, MovieForm form) {
+        form.setDuration(LocalTime.of(2, 0));
         Movie toUpdate = repository.findById(id).orElseThrow();
         toUpdate.setTitle(form.getTitle());
         toUpdate.setDescription(form.getDescription());
@@ -68,7 +71,7 @@ public class MovieServiceImpl implements MovieService {
         toUpdate.setReleaseDate(form.getReleaseDate());
         toUpdate.setStatus(form.getStatus());
         toUpdate.setFormats(FormConverterList.convertIdList2EntityList(formatRepo,form.getFormats()));
-        toUpdate.setGenres(FormConverterList.convertIdList2EntityList(genreRepo,form.getGenres()));
+        toUpdate.setGenres(form.getGenres());
         toUpdate.setPersons(FormConverterList.convertIdList2EntityList(personRepo,form.getPersons()));
         toUpdate = repository.save(toUpdate);
         return MovieDTO.of(toUpdate);

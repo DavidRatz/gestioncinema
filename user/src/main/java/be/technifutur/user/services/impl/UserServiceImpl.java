@@ -61,16 +61,15 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     
 
     @Override
-    public ReservationDataDTO getReservationByIdUser(Long id) {
-        CartDTO cart = cRepo.findByUser(uRepo.findById(id).orElseThrow()).map(CartDTO::of).orElseThrow();
-        SessionAllDataDTO sessionDTO = session.getSearchSessionUser(cart.getRefSeance());
-        List<TicketDTO> ticketDTO = ticket.getTickets(cart.getRef());
+    public ReservationDataDTO getReservationByUsername(String username) {
+        CartDTO cartDTO = cRepo.findByUser(uRepo.findByUsername(username).orElseThrow()).map(CartDTO::of).orElseThrow();
+        SessionAllDataDTO sessionDTO = session.getSearchSessionUser(cartDTO.getRefSeance());
+        TicketDTO ticketDTO = ticket.getTickets(cartDTO.getRef());
 
 
         ReservationDataDTO reservationData = ReservationDataDTO.builder()
                                                 .sessionDTO(sessionDTO)
-                                                .quantity(cart.getQuantity())
-                                                .price(cart.getPrice())
+                                                .cartDTO(cartDTO)
                                                 .ticketDTO(ticketDTO)
                                                 .build();
         return reservationData;

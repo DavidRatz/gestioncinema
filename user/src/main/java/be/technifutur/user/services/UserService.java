@@ -15,5 +15,5 @@ public interface UserService {
     UserDTO delete(Long id);
     UserDTO update(Long id, UserForm form);
     UserDTO getUserByUsername(String username);
-    ReservationDataDTO getReservationByIdUser(Long id);
+    ReservationDataDTO getReservationByUsername(String username);
 }

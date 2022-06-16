@@ -7,6 +7,7 @@ import be.technifutur.reservation.models.repositories.TicketRepository;
 import be.technifutur.reservation.services.TicketService;
 import be.technifutur.sharedclass.user.models.dtos.Cart2ReservDTO;
 
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.time.*;
@@ -38,15 +39,12 @@ public class TicketServiceImpl implements TicketService {
                             .dateShipping(LocalDateTime.now())
                             .refCart(cart.getRefCart())
                             .build();
-        for (int i = 0; i < cart.getQuantity(); i++) {
-            repository.save(ticket);
-        }
+        repository.save(ticket);
     }
 
     @Override
-    public List<TicketDTO> getAllTicketByRefCart(UUID ref) {
-       List<Ticket> list = repository.findAllByRefCart(ref);
-        return list.stream().map(TicketDTO::of).toList();
+    public TicketDTO getAllTicketByRefCart(UUID ref) {
+        return repository.findByRefCart(ref).map(TicketDTO::of).orElseThrow();
     }
 
     @Override

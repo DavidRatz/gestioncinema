@@ -14,6 +14,6 @@ public class MovieForm {
     private LocalDate releaseDate;
     private Status status = Status.SOON;
     private List<Long> formats;
-    private List<Long> genres;
+    private List<Genre> genres;
     private List<Long> persons;
 }
